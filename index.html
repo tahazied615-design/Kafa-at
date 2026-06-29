@@ -1,4 +1,4 @@
-<<<!DOCTYPE html>
+<<<!<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -6,299 +6,519 @@
     <title>كفاءات - المنصة الوطنية للتوظيف والتدريب</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             font-family: 'Cairo', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            overflow-x: hidden;
         }
-        .gradient-bg {
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+        .gradient-hero {
+            background: linear-gradient(135deg, #0c1a32 0%, #1a3a6b 50%, #0f2b4f 100%);
+            position: relative;
         }
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        .gradient-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
-        .transition-smooth {
-            transition: all 0.3s ease-in-out;
+        .card-glow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .card-glow:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+        .identity-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .identity-card:hover {
+            border-color: #f59e0b;
+            transform: scale(1.03);
+        }
+        .identity-card.selected {
+            border-color: #1e3a8a;
+            background: #eff6ff;
+            border-width: 3px;
         }
         .tab-content {
             display: none;
+            animation: fadeIn 0.5s ease;
         }
         .tab-content.active {
             display: block;
         }
-        /* تنسيق الخطوة الأولى (اختيار الهوية) */
-        .identity-card {
-            cursor: pointer;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
             transition: all 0.3s ease;
         }
-        .identity-card:hover, .identity-card.selected {
-            border-color: #1e3a8a;
-            background-color: #eff6ff;
-            transform: scale(1.02);
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #1e40af, #1d4ed8);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.3);
         }
-        .identity-card.selected {
-            border-width: 3px;
+        .btn-gold {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            transition: all 0.3s ease;
+        }
+        .btn-gold:hover {
+            background: linear-gradient(135deg, #d97706, #b45309);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
+        }
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 4px 25px rgba(37, 211, 102, 0.6); }
+            100% { box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
+        }
+        .input-field {
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            border-color: #1e3a8a;
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+            outline: none;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #1e3a8a, #f59e0b);
+            border-radius: 10px;
+        }
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e3a8a;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1e40af;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body>
 
-    <!-- ====== الهيدر (ثابت) ====== -->
-    <header class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+    <!-- ====== واتساب عائم ====== -->
+    <a href="https://wa.me/218918756368" target="_blank" class="whatsapp-float" title="دعم فني واتساب">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- ====== الهيدر ====== -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="bg-blue-900 text-amber-400 p-2.5 rounded-lg shadow-md font-bold text-xl tracking-wider">
+                <div class="bg-gradient-to-br from-blue-900 to-blue-700 text-amber-400 p-3 rounded-xl shadow-lg font-extrabold text-xl tracking-wider">
                     كفاءات
                 </div>
                 <div>
-                    <h1 class="text-xl font-bold text-blue-900 tracking-tight">منصة كفاءات الوطنية</h1>
-                    <p class="text-xs text-slate-500 font-medium">بوابتك نحو التميز الوظيفي والتدريبي</p>
+                    <h1 class="text-xl font-extrabold text-blue-900 tracking-tight">منصة كفاءات الوطنية</h1>
+                    <p class="text-xs text-slate-500 font-medium">بوابتك الرسمية للتوظيف والتدريب في ليبيا</p>
                 </div>
             </div>
             
-            <nav class="hidden md:flex items-center gap-8 font-medium text-slate-600">
+            <nav class="hidden md:flex items-center gap-8 font-semibold text-slate-600">
                 <a href="#" class="text-blue-900 border-b-2 border-blue-900 pb-1">الرئيسية</a>
                 <a href="#" class="hover:text-blue-900 transition-colors">الوظائف</a>
                 <a href="#" class="hover:text-blue-900 transition-colors">التدريب</a>
                 <a href="#" class="hover:text-blue-900 transition-colors">صانع الـ CV</a>
+                <a href="#" class="hover:text-blue-900 transition-colors">الاشتراكات</a>
             </nav>
 
             <div class="flex items-center gap-3">
-                <button onclick="openModal('login')" class="px-4 py-2 text-sm font-semibold text-blue-900 hover:bg-slate-100 rounded-lg transition-colors">
-                    تسجيل الدخول
+                <button onclick="openModal('login')" class="px-5 py-2 text-sm font-semibold text-blue-900 hover:bg-slate-100 rounded-xl transition-colors border border-slate-200">
+                    <i class="fas fa-user ml-2"></i> دخول
                 </button>
-                <button onclick="openModal('register')" class="px-5 py-2.5 text-sm font-semibold bg-blue-900 hover:bg-blue-800 text-white rounded-lg shadow-sm transition-all">
-                    إنشاء حساب جديد
+                <button onclick="openModal('register')" class="px-6 py-2.5 text-sm font-bold bg-gradient-to-r from-blue-900 to-blue-700 hover:from-blue-800 hover:to-blue-600 text-white rounded-xl shadow-md transition-all">
+                    <i class="fas fa-user-plus ml-2"></i> اشترك الآن
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- ====== القسم الرئيسي (Hero) مع خطوة اختيار الهوية ====== -->
-    <section class="gradient-bg text-white py-20 px-4 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#e2e8f0 1px, transparent 1px); background-size: 16px 16px;"></div>
-        <div class="max-w-5xl mx-auto text-center relative z-10">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-blue-800/60 text-amber-300 border border-blue-700 mb-6">
-                <i class="fas fa-check-circle text-[10px]"></i> المنصة الرسمية للتوظيف والتدريب في ليبيا
-            </span>
-            <h2 class="text-4xl sm:text-5xl font-extrabold mb-6 leading-tight tracking-tight">
-                مستقبلك المهني يبدأ <span class="text-amber-400">من هنا</span>
+    <!-- ====== الهيرو الرئيسي ====== -->
+    <section class="gradient-hero text-white py-24 px-4 relative overflow-hidden">
+        <div class="max-w-6xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-white/10 text-amber-300 border border-white/20 backdrop-blur-sm mb-8">
+                <i class="fas fa-check-circle text-amber-400"></i>
+                المنصة الرسمية المعتمدة من وزارة العمل والتأهيل
+            </div>
+            
+            <h2 class="text-5xl sm:text-6xl md:text-7xl font-black mb-6 leading-tight tracking-tight">
+                مستقبلك المهني <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-l from-amber-400 to-yellow-300">يبدأ من هنا</span>
             </h2>
-            <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-                منصة حكومية رقمية تجمع الباحثين عن عمل، الشركات، وجهات التوظيف في مكان واحد. اختر هويتك لتبدأ رحلتك.
+            
+            <p class="text-xl text-slate-300 max-w-3xl mx-auto mb-12 font-light leading-relaxed">
+                أكثر من <span class="text-amber-400 font-bold">10,000</span> كفاءة وطنية انضمت إلينا. 
+                منصة حكومية رقمية متكاملة تجمع الباحثين عن عمل، الشركات، وجهات التوظيف في مكان واحد.
             </p>
 
-            <!-- خطوة 1: اختيار الهوية -->
-            <div class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 max-w-4xl mx-auto mb-8">
-                <h3 class="text-2xl font-bold mb-6">اختر هويتك لتبدأ</h3>
+            <!-- خطوة اختيار الهوية -->
+            <div class="glass rounded-3xl p-8 md:p-10 max-w-5xl mx-auto mb-10">
+                <h3 class="text-2xl font-bold mb-8">اختر هويتك لتبدأ رحلتك المهنية</h3>
+                
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- باحث عن عمل -->
-                    <div onclick="selectIdentity('seeker', this)" class="identity-card bg-white text-slate-800 p-6 rounded-xl border-2 border-transparent shadow-lg">
-                        <i class="fas fa-user-tie text-4xl text-blue-900 mb-3"></i>
-                        <h4 class="font-bold text-lg">باحث عن عمل</h4>
-                        <p class="text-sm text-slate-500">أبحث عن فرصة عمل تناسب مهاراتي</p>
-                        <div class="mt-4 text-xs text-green-600 font-semibold">
-                            <i class="fas fa-check-circle ml-1"></i> اشتراك مجاني
+                    <div onclick="selectIdentity('seeker', this)" class="identity-card bg-white text-slate-800 p-8 rounded-2xl shadow-xl hover:shadow-2xl">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-user-tie text-3xl text-blue-900"></i>
+                        </div>
+                        <h4 class="font-extrabold text-xl mb-2">باحث عن عمل</h4>
+                        <p class="text-sm text-slate-500 mb-4">أبحث عن فرصة عمل تناسب مهاراتي وخبراتي</p>
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-l from-green-100 to-green-200 rounded-full text-sm font-bold text-green-800">
+                            <i class="fas fa-check-circle"></i>
+                            اشتراك 1 دينار فقط
                         </div>
                     </div>
+                    
                     <!-- شركة -->
-                    <div onclick="selectIdentity('company', this)" class="identity-card bg-white text-slate-800 p-6 rounded-xl border-2 border-transparent shadow-lg">
-                        <i class="fas fa-building text-4xl text-amber-500 mb-3"></i>
-                        <h4 class="font-bold text-lg">شركة</h4>
-                        <p class="text-sm text-slate-500">أبحث عن كفاءات لشركتي</p>
-                        <div class="mt-4 text-xs text-amber-600 font-semibold">
-                            <i class="fas fa-crown ml-1"></i> اشتراك 50 دينار مدى الحياة
+                    <div onclick="selectIdentity('company', this)" class="identity-card bg-white text-slate-800 p-8 rounded-2xl shadow-xl hover:shadow-2xl border-2 border-transparent relative">
+                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-l from-amber-400 to-yellow-300 text-blue-950 px-6 py-1 rounded-full text-xs font-extrabold shadow-lg">
+                            الأكثر طلباً
+                        </div>
+                        <div class="w-16 h-16 bg-gradient-to-br from-amber-100 to-amber-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-building text-3xl text-amber-600"></i>
+                        </div>
+                        <h4 class="font-extrabold text-xl mb-2">شركة</h4>
+                        <p class="text-sm text-slate-500 mb-4">أبحث عن أفضل الكفاءات لشركتي</p>
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-l from-amber-100 to-amber-200 rounded-full text-sm font-bold text-amber-800">
+                            <i class="fas fa-crown"></i>
+                            50 دينار مدى الحياة
                         </div>
                     </div>
+                    
                     <!-- جهة توظيف -->
-                    <div onclick="selectIdentity('agency', this)" class="identity-card bg-white text-slate-800 p-6 rounded-xl border-2 border-transparent shadow-lg">
-                        <i class="fas fa-handshake text-4xl text-purple-600 mb-3"></i>
-                        <h4 class="font-bold text-lg">جهة توظيف</h4>
-                        <p class="text-sm text-slate-500">أمثل جهة توظيف أو مؤسسة وساطة</p>
-                        <div class="mt-4 text-xs text-purple-600 font-semibold">
-                            <i class="fas fa-crown ml-1"></i> اشتراك 50 دينار مدى الحياة
+                    <div onclick="selectIdentity('agency', this)" class="identity-card bg-white text-slate-800 p-8 rounded-2xl shadow-xl hover:shadow-2xl">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-handshake text-3xl text-purple-600"></i>
+                        </div>
+                        <h4 class="font-extrabold text-xl mb-2">جهة توظيف</h4>
+                        <p class="text-sm text-slate-500 mb-4">أمثل جهة توظيف أو مؤسسة وساطة</p>
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-l from-purple-100 to-purple-200 rounded-full text-sm font-bold text-purple-800">
+                            <i class="fas fa-crown"></i>
+                            50 دينار مدى الحياة
                         </div>
                     </div>
                 </div>
-                <button onclick="startRegistration()" class="mt-8 px-10 py-4 bg-amber-400 hover:bg-amber-500 text-blue-950 font-bold rounded-xl shadow-lg transition-all text-lg">
-                    <i class="fas fa-arrow-left ml-2"></i> ابدأ الآن
+                
+                <button onclick="startRegistration()" class="mt-10 px-12 py-5 btn-gold text-blue-950 font-extrabold text-xl rounded-2xl shadow-2xl transition-all inline-flex items-center gap-3">
+                    <i class="fas fa-arrow-left"></i>
+                    ابدأ رحلتك المهنية الآن
+                    <i class="fas fa-sparkles"></i>
                 </button>
             </div>
 
-            <!-- شريط البحث السريع (يظهر بعد اختيار الهوية) -->
-            <div id="searchBar" class="hidden bg-white p-3 rounded-xl shadow-2xl max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-3 text-slate-800">
-                <div class="flex items-center gap-2 px-3 border-b md:border-b-0 md:border-l border-slate-200 pb-2 md:pb-0 col-span-2">
-                    <i class="fas fa-search text-slate-400"></i>
-                    <input type="text" placeholder="مسمى الوظيفة، المهارة، أو الشركة..." class="w-full focus:outline-none text-sm bg-transparent" />
+            <!-- شريط البحث (يظهر بعد اختيار الهوية) -->
+            <div id="searchBar" class="hidden bg-white rounded-2xl shadow-2xl p-4 max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                    <div class="md:col-span-2 flex items-center gap-3 px-4 border-b md:border-b-0 md:border-l border-slate-200 pb-3 md:pb-0">
+                        <i class="fas fa-search text-slate-400"></i>
+                        <input type="text" placeholder="ابحث عن وظيفة، مهارة، أو شركة..." class="w-full focus:outline-none text-sm bg-transparent text-slate-800">
+                    </div>
+                    <div class="flex items-center gap-3 px-4 border-b md:border-b-0 md:border-l border-slate-200 pb-3 md:pb-0">
+                        <i class="fas fa-map-marker-alt text-slate-400"></i>
+                        <select class="w-full focus:outline-none text-sm bg-transparent text-slate-600">
+                            <option>كل المدن الليبية</option>
+                            <option>طرابلس</option>
+                            <option>بنغازي</option>
+                            <option>مصراتة</option>
+                            <option>سبها</option>
+                            <option>عن بُعد</option>
+                        </select>
+                    </div>
+                    <button class="w-full btn-gold text-blue-950 font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 shadow-md">
+                        <i class="fas fa-search"></i>
+                        <span>ابحث</span>
+                    </button>
                 </div>
-                <div class="flex items-center gap-2 px-3 border-b md:border-b-0 md:border-l border-slate-200 pb-2 md:pb-0">
-                    <i class="fas fa-map-marker-alt text-slate-400"></i>
-                    <select class="w-full focus:outline-none text-sm bg-transparent text-slate-600">
-                        <option>كل المدن</option>
-                        <option>طرابلس</option>
-                        <option>بنغازي</option>
-                        <option>مصراتة</option>
-                        <option>سبها</option>
-                        <option>عن بُعد</option>
-                    </select>
-                </div>
-                <button class="w-full bg-amber-500 hover:bg-amber-600 text-blue-950 font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2 shadow-md">
-                    <span>ابحث</span>
-                </button>
             </div>
         </div>
     </section>
 
-    <!-- ====== المحتوى الرئيسي (يظهر بعد الاشتراك) ====== -->
-    <main id="mainContent" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <!-- ====== المحتوى الرئيسي ====== -->
+    <main id="mainContent" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         
-        <!-- تبويبات: الوظائف / الدورات / صانع CV -->
-        <div class="mb-12">
-            <div class="flex justify-center gap-4 border-b border-slate-200 pb-4">
-                <button onclick="switchTab('jobs', this)" class="tab-btn px-6 py-2 rounded-t-lg font-semibold text-blue-900 border-b-2 border-blue-900 bg-blue-50 transition-all">الوظائف</button>
-                <button onclick="switchTab('courses', this)" class="tab-btn px-6 py-2 rounded-t-lg font-semibold text-slate-500 hover:text-blue-900 transition-all">الدورات التدريبية</button>
-                <button onclick="switchTab('cv', this)" class="tab-btn px-6 py-2 rounded-t-lg font-semibold text-slate-500 hover:text-blue-900 transition-all">صانع الـ CV</button>
+        <!-- ====== إحصائيات ====== -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
+            <div class="bg-white p-6 rounded-2xl shadow-md text-center card-glow">
+                <div class="text-4xl font-black text-blue-900">10,000+</div>
+                <p class="text-sm text-slate-500 font-semibold mt-2">مستخدم مسجل</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-md text-center card-glow">
+                <div class="text-4xl font-black text-blue-900">500+</div>
+                <p class="text-sm text-slate-500 font-semibold mt-2">شركة مسجلة</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-md text-center card-glow">
+                <div class="text-4xl font-black text-blue-900">1,200+</div>
+                <p class="text-sm text-slate-500 font-semibold mt-2">وظيفة منشورة</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-md text-center card-glow">
+                <div class="text-4xl font-black text-blue-900">50+</div>
+                <p class="text-sm text-slate-500 font-semibold mt-2">دورة تدريبية</p>
+            </div>
+        </div>
+
+        <!-- ====== تبويبات ====== -->
+        <div class="mb-16">
+            <div class="flex justify-center gap-2 bg-white p-2 rounded-2xl shadow-md mb-10 max-w-md mx-auto">
+                <button onclick="switchTab('jobs', this)" class="tab-btn px-8 py-3 rounded-xl font-bold text-sm bg-blue-900 text-white shadow-md transition-all">
+                    <i class="fas fa-briefcase ml-2"></i> الوظائف
+                </button>
+                <button onclick="switchTab('courses', this)" class="tab-btn px-8 py-3 rounded-xl font-bold text-sm text-slate-500 hover:bg-slate-100 transition-all">
+                    <i class="fas fa-book ml-2"></i> التدريب
+                </button>
+                <button onclick="switchTab('cv', this)" class="tab-btn px-8 py-3 rounded-xl font-bold text-sm text-slate-500 hover:bg-slate-100 transition-all">
+                    <i class="fas fa-file-invoice ml-2"></i> الـ CV
+                </button>
             </div>
 
-            <!-- محتوى تبويب الوظائف -->
-            <div id="jobs" class="tab-content active mt-8">
-                <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-bold text-blue-900">أحدث الوظائف المدرجة</h3>
-                    <a href="#" class="text-sm font-semibold text-blue-700 hover:text-blue-900">عرض الكل <i class="fas fa-arrow-left mr-1"></i></a>
+            <!-- تبويب الوظائف -->
+            <div id="jobs" class="tab-content active">
+                <div class="flex items-center justify-between mb-8">
+                    <h3 class="text-2xl font-extrabold text-blue-900 section-title">أحدث الفرص الوظيفية</h3>
+                    <a href="#" class="text-sm font-bold text-blue-700 hover:text-blue-900 flex items-center gap-1">
+                        عرض الكل <i class="fas fa-arrow-left text-xs"></i>
+                    </a>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- بطاقة وظيفة 1 -->
-                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-lg card-hover transition-smooth">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-900 font-bold">ش</div>
+                    <!-- وظيفة 1 -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm card-glow">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-14 h-14 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center text-blue-900 font-extrabold text-xl">ش</div>
                             <div>
-                                <h4 class="font-bold text-slate-900">مهندس برمجيات</h4>
-                                <p class="text-xs text-slate-500">شركة التقنية المتقدمة</p>
+                                <h4 class="font-extrabold text-lg text-slate-900">مهندس برمجيات أول</h4>
+                                <p class="text-xs text-slate-500 font-semibold">شركة التقنية المتقدمة</p>
                             </div>
                         </div>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 text-xs rounded-full bg-blue-50 text-blue-700 border border-blue-100">دوام كامل</span>
-                            <span class="px-2 py-1 text-xs rounded-full bg-green-50 text-green-700 border border-green-100">طرابلس</span>
+                            <span class="badge bg-blue-50 text-blue-700 border border-blue-100">دوام كامل</span>
+                            <span class="badge bg-green-50 text-green-700 border border-green-100">طرابلس</span>
+                            <span class="badge bg-purple-50 text-purple-700 border border-purple-100">خبرة 3 سنوات</span>
                         </div>
-                        <p class="text-sm text-slate-600 mb-4">مطلوب مهندس برمجيات بخبرة في تطوير الويب والتعامل مع قواعد البيانات.</p>
-                        <div class="flex items-center justify-between">
+                        <p class="text-sm text-slate-600 mb-4 leading-relaxed">مطلوب مهندس برمجيات بخبرة في React و Node.js للانضمام إلى فريق التطوير.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
                             <span class="text-xs text-slate-400"><i class="far fa-clock ml-1"></i> منذ 3 ساعات</span>
-                            <button class="px-4 py-2 text-xs font-bold bg-slate-900 text-white rounded-md hover:bg-slate-800 transition-colors">تقدم الآن</button>
+                            <button class="px-5 py-2 text-xs font-bold btn-primary text-white rounded-xl shadow-md transition-all">
+                                <i class="fas fa-paper-plane ml-1"></i> تقدم الآن
+                            </button>
                         </div>
                     </div>
-                    <!-- بطاقة وظيفة 2 (قطاع المواد الغذائية) -->
-                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-lg card-hover transition-smooth">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center text-amber-900 font-bold">غ</div>
+                    <!-- وظيفة 2 (قطاع الغذاء) -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm card-glow">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-14 h-14 bg-gradient-to-br from-amber-100 to-amber-200 rounded-2xl flex items-center justify-center text-amber-900 font-extrabold text-xl">غ</div>
                             <div>
-                                <h4 class="font-bold text-slate-900">مشرف إنتاج غذائي</h4>
-                                <p class="text-xs text-slate-500">شركة الغذاء الصحي</p>
+                                <h4 class="font-extrabold text-lg text-slate-900">مدير إنتاج غذائي</h4>
+                                <p class="text-xs text-slate-500 font-semibold">شركة الغذاء الصحي</p>
                             </div>
                         </div>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 text-xs rounded-full bg-blue-50 text-blue-700 border border-blue-100">دوام كامل</span>
-                            <span class="px-2 py-1 text-xs rounded-full bg-green-50 text-green-700 border border-green-100">مصراتة</span>
+                            <span class="badge bg-blue-50 text-blue-700 border border-blue-100">دوام كامل</span>
+                            <span class="badge bg-green-50 text-green-700 border border-green-100">مصراتة</span>
+                            <span class="badge bg-amber-50 text-amber-700 border border-amber-100">إشراف</span>
                         </div>
-                        <p class="text-sm text-slate-600 mb-4">الإشراف على خطوط الإنتاج وضمان جودة المنتجات الغذائية.</p>
-                        <div class="flex items-center justify-between">
+                        <p class="text-sm text-slate-600 mb-4 leading-relaxed">الإشراف على خطوط الإنتاج وضمان جودة المنتجات الغذائية وفق المعايير.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
                             <span class="text-xs text-slate-400"><i class="far fa-clock ml-1"></i> منذ يوم</span>
-                            <button class="px-4 py-2 text-xs font-bold bg-slate-900 text-white rounded-md hover:bg-slate-800 transition-colors">تقدم الآن</button>
+                            <button class="px-5 py-2 text-xs font-bold btn-primary text-white rounded-xl shadow-md transition-all">
+                                <i class="fas fa-paper-plane ml-1"></i> تقدم الآن
+                            </button>
                         </div>
                     </div>
-                    <!-- بطاقة وظيفة 3 -->
-                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-lg card-hover transition-smooth">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center text-purple-900 font-bold">م</div>
+                    <!-- وظيفة 3 -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm card-glow">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-14 h-14 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center text-purple-900 font-extrabold text-xl">م</div>
                             <div>
-                                <h4 class="font-bold text-slate-900">محاسب مالي</h4>
-                                <p class="text-xs text-slate-500">مجموعة المدار المالية</p>
+                                <h4 class="font-extrabold text-lg text-slate-900">محاسب مالي معتمد</h4>
+                                <p class="text-xs text-slate-500 font-semibold">مجموعة المدار المالية</p>
                             </div>
                         </div>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 text-xs rounded-full bg-blue-50 text-blue-700 border border-blue-100">دوام كامل</span>
-                            <span class="px-2 py-1 text-xs rounded-full bg-green-50 text-green-700 border border-green-100">بنغازي</span>
+                            <span class="badge bg-blue-50 text-blue-700 border border-blue-100">دوام كامل</span>
+                            <span class="badge bg-green-50 text-green-700 border border-green-100">بنغازي</span>
+                            <span class="badge bg-red-50 text-red-700 border border-red-100">خبرة 5 سنوات</span>
                         </div>
-                        <p class="text-sm text-slate-600 mb-4">خبرة في المحاسبة المالية وإعداد التقارير والضرائب.</p>
-                        <div class="flex items-center justify-between">
+                        <p class="text-sm text-slate-600 mb-4 leading-relaxed">خبرة في المحاسبة المالية وإعداد التقارير والضرائب والمعايير الدولية.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
                             <span class="text-xs text-slate-400"><i class="far fa-clock ml-1"></i> منذ يومين</span>
-                            <button class="px-4 py-2 text-xs font-bold bg-slate-900 text-white rounded-md hover:bg-slate-800 transition-colors">تقدم الآن</button>
+                            <button class="px-5 py-2 text-xs font-bold btn-primary text-white rounded-xl shadow-md transition-all">
+                                <i class="fas fa-paper-plane ml-1"></i> تقدم الآن
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- محتوى تبويب الدورات التدريبية (مجانية للجميع) -->
-            <div id="courses" class="tab-content mt-8">
-                <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-bold text-blue-900">دورات تدريبية مجانية</h3>
-                    <a href="#" class="text-sm font-semibold text-blue-700 hover:text-blue-900">عرض الكل <i class="fas fa-arrow-left mr-1"></i></a>
+            <!-- تبويب الدورات التدريبية -->
+            <div id="courses" class="tab-content">
+                <div class="flex items-center justify-between mb-8">
+                    <h3 class="text-2xl font-extrabold text-blue-900 section-title">دورات تدريبية مجانية</h3>
+                    <a href="#" class="text-sm font-bold text-blue-700 hover:text-blue-900 flex items-center gap-1">
+                        عرض الكل <i class="fas fa-arrow-left text-xs"></i>
+                    </a>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-                        <span class="inline-block px-2.5 py-0.5 rounded text-[11px] font-bold bg-amber-100 text-amber-800 border border-amber-200 mb-3">تسجيل مفتوح</span>
-                        <h4 class="font-bold text-base text-slate-900 mb-2">أساسيات الأمن السيبراني</h4>
-                        <p class="text-xs text-slate-500 mb-3">مركز التكنولوجيا المتقدمة</p>
-                        <div class="flex items-center justify-between text-xs font-medium text-slate-400">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm card-glow">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-amber-100 to-amber-200 rounded-xl flex items-center justify-center text-amber-600">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <span class="badge bg-green-100 text-green-800 border border-green-200">تسجيل مفتوح</span>
+                            </div>
+                        </div>
+                        <h4 class="font-extrabold text-lg text-slate-900 mb-2">أساسيات الأمن السيبراني</h4>
+                        <p class="text-sm text-slate-500 mb-4">مركز التكنولوجيا المتقدمة</p>
+                        <div class="flex items-center justify-between text-sm font-semibold text-slate-400 pt-4 border-t border-slate-100">
                             <span><i class="fas fa-map-marker-alt ml-1"></i> عن بُعد</span>
-                            <span class="text-blue-800 font-semibold">4 أسابيع</span>
+                            <span class="text-blue-800">4 أسابيع</span>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-                        <span class="inline-block px-2.5 py-0.5 rounded text-[11px] font-bold bg-green-100 text-green-800 border border-green-200 mb-3">قريباً</span>
-                        <h4 class="font-bold text-base text-slate-900 mb-2">إدارة المشاريع الاحترافية</h4>
-                        <p class="text-xs text-slate-500 mb-3">أكاديمية التدريب الوطنية</p>
-                        <div class="flex items-center justify-between text-xs font-medium text-slate-400">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm card-glow">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center text-blue-600">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <span class="badge bg-amber-100 text-amber-800 border border-amber-200">قريباً</span>
+                            </div>
+                        </div>
+                        <h4 class="font-extrabold text-lg text-slate-900 mb-2">إدارة المشاريع الاحترافية</h4>
+                        <p class="text-sm text-slate-500 mb-4">أكاديمية التدريب الوطنية</p>
+                        <div class="flex items-center justify-between text-sm font-semibold text-slate-400 pt-4 border-t border-slate-100">
                             <span><i class="fas fa-map-marker-alt ml-1"></i> طرابلس</span>
-                            <span class="text-blue-800 font-semibold">6 أسابيع</span>
+                            <span class="text-blue-800">6 أسابيع</span>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-                        <span class="inline-block px-2.5 py-0.5 rounded text-[11px] font-bold bg-blue-100 text-blue-800 border border-blue-200 mb-3">مباشر</span>
-                        <h4 class="font-bold text-base text-slate-900 mb-2">تطوير تطبيقات الموبايل</h4>
-                        <p class="text-xs text-slate-500 mb-3">أكاديمية البرمجة الحديثة</p>
-                        <div class="flex items-center justify-between text-xs font-medium text-slate-400">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm card-glow">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-100 to-green-200 rounded-xl flex items-center justify-center text-green-600">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div>
+                                <span class="badge bg-blue-100 text-blue-800 border border-blue-200">مباشر</span>
+                            </div>
+                        </div>
+                        <h4 class="font-extrabold text-lg text-slate-900 mb-2">تطوير تطبيقات الموبايل</h4>
+                        <p class="text-sm text-slate-500 mb-4">أكاديمية البرمجة الحديثة</p>
+                        <div class="flex items-center justify-between text-sm font-semibold text-slate-400 pt-4 border-t border-slate-100">
                             <span><i class="fas fa-map-marker-alt ml-1"></i> عن بُعد</span>
-                            <span class="text-blue-800 font-semibold">8 أسابيع</span>
+                            <span class="text-blue-800">8 أسابيع</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- محتوى تبويب صانع السيرة الذاتية -->
-            <div id="cv" class="tab-content mt-8">
-                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
-                    <div class="flex items-center gap-3 mb-8">
-                        <i class="fas fa-file-invoice text-blue-900 text-2xl"></i>
-                        <h3 class="text-2xl font-bold text-blue-900">صانع السيرة الذاتية الاحترافية</h3>
+            <!-- تبويب صانع السيرة الذاتية -->
+            <div id="cv" class="tab-content">
+                <div class="bg-white rounded-3xl border border-slate-100 shadow-xl overflow-hidden">
+                    <div class="bg-gradient-to-l from-blue-900 to-blue-700 text-white p-8 text-center">
+                        <i class="fas fa-file-invoice text-5xl mb-4"></i>
+                        <h3 class="text-3xl font-extrabold">صانع السيرة الذاتية الاحترافية</h3>
+                        <p class="text-blue-200 mt-2">أنشئ سيرتك الذاتية في دقيقتين واحصل على فرصتك</p>
                     </div>
                     
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        <!-- نموذج إدخال البيانات -->
-                        <div class="space-y-4">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
+                        <!-- النموذج -->
+                        <div class="space-y-5">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-sm font-semibold text-slate-700 mb-1">الاسم الكامل</label>
-                                    <input type="text" placeholder="أدخل اسمك" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <label class="block text-sm font-bold text-slate-700 mb-2">الاسم الكامل</label>
+                                    <input type="text" placeholder="أدخل اسمك الثلاثي" class="input-field w-full px-4 py-3 rounded-xl">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-semibold text-slate-700 mb-1">رقم الهاتف</label>
-                                    <input type="tel" placeholder="091xxxxxxx" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <label class="block text-sm font-bold text-slate-700 mb-2">رقم الهاتف</label>
+                                    <input type="tel" placeholder="091xxxxxxx" class="input-field w-full px-4 py-3 rounded-xl">
                                 </div>
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-sm font-semibold text-slate-700 mb-1">الجنس</label>
-                                    <select class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                                    <label class="block text-sm font-bold text-slate-700 mb-2">الجنس</label>
+                                    <select class="input-field w-full px-4 py-3 rounded-xl">
                                         <option>ذكر</option>
                                         <option>أنثى</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-semibold text-slate-700 mb-1">الحالة</label>
-                                    <select class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                                    <label class="block text-sm font-bold text-slate-700 mb-2">الحالة</label>
+                                    <select class="input-field w-full px-4 py-3 rounded-xl">
                                         <option>خريج</option>
                                         <option>طالب</option>
                                         <option>موظف</option>
@@ -307,40 +527,48 @@
                                 </div>
                             </div>
                             <div>
-                                <label class="block text-sm font-semibold text-slate-700 mb-1">الكلية / التخصص</label>
-                                <input type="text" placeholder="مثال: كلية الهندسة - قسم الحاسوب" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <label class="block text-sm font-bold text-slate-700 mb-2">الكلية / التخصص</label>
+                                <input type="text" placeholder="مثال: كلية الهندسة - قسم الحاسوب" class="input-field w-full px-4 py-3 rounded-xl">
                             </div>
                             <div>
-                                <label class="block text-sm font-semibold text-slate-700 mb-1">المهارات (افصل بينها بفاصلة)</label>
-                                <input type="text" placeholder="HTML, CSS, JavaScript, Python" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <label class="block text-sm font-bold text-slate-700 mb-2">المهارات (افصل بينها بفاصلة)</label>
+                                <input type="text" placeholder="HTML, CSS, JavaScript, Python, إدارة المشاريع" class="input-field w-full px-4 py-3 rounded-xl">
                             </div>
                             <div>
-                                <label class="block text-sm font-semibold text-slate-700 mb-1">الشهادات</label>
-                                <textarea rows="2" placeholder="شهادة بكالوريوس، دورة تدريبية..." class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+                                <label class="block text-sm font-bold text-slate-700 mb-2">الشهادات</label>
+                                <textarea rows="3" placeholder="شهادة بكالوريوس، دورة تدريبية، شهادة مهنية..." class="input-field w-full px-4 py-3 rounded-xl"></textarea>
                             </div>
-                            <button class="w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition-all">
-                                <i class="fas fa-file-pdf ml-2"></i> توليد السيرة الذاتية (PDF)
+                            <button class="w-full btn-primary text-white font-extrabold py-4 rounded-2xl shadow-lg transition-all text-lg">
+                                <i class="fas fa-file-pdf ml-2"></i> توليد السيرة الذاتية PDF
                             </button>
                         </div>
 
-                        <!-- معاينة الـ CV -->
-                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
-                            <div class="text-center mb-6">
-                                <div class="w-20 h-20 bg-blue-900 rounded-full mx-auto flex items-center justify-center text-white text-2xl font-bold">ي</div>
-                                <h4 class="text-xl font-bold text-slate-900 mt-3">[الاسم هنا]</h4>
-                                <p class="text-sm text-slate-500">[التخصص] | [الحالة]</p>
+                        <!-- المعاينة -->
+                        <div class="bg-gradient-to-b from-slate-50 to-white p-8 rounded-2xl border border-slate-200">
+                            <div class="text-center mb-8">
+                                <div class="w-24 h-24 bg-gradient-to-br from-blue-900 to-blue-700 rounded-full mx-auto flex items-center justify-center text-white text-3xl font-extrabold shadow-lg floating">
+                                    ك
+                                </div>
+                                <h4 class="text-2xl font-extrabold text-slate-900 mt-4">[الاسم الكامل]</h4>
+                                <p class="text-sm text-slate-500 font-semibold">[التخصص] | [الحالة]</p>
                             </div>
-                            <div class="space-y-4 text-sm">
-                                <div>
-                                    <span class="font-bold text-blue-900">المهارات:</span>
-                                    <p class="text-slate-600">HTML, CSS, JavaScript</p>
+                            <div class="space-y-6">
+                                <div class="bg-white p-4 rounded-xl border border-slate-100">
+                                    <span class="font-extrabold text-blue-900 flex items-center gap-2 mb-2">
+                                        <i class="fas fa-star text-amber-400"></i> المهارات
+                                    </span>
+                                    <p class="text-slate-600">HTML, CSS, JavaScript, Python</p>
                                 </div>
-                                <div>
-                                    <span class="font-bold text-blue-900">الشهادات:</span>
-                                    <p class="text-slate-600">بكالوريوس هندسة برمجيات</p>
+                                <div class="bg-white p-4 rounded-xl border border-slate-100">
+                                    <span class="font-extrabold text-blue-900 flex items-center gap-2 mb-2">
+                                        <i class="fas fa-certificate text-amber-400"></i> الشهادات
+                                    </span>
+                                    <p class="text-slate-600">بكالوريوس هندسة برمجيات - دورة أمن سيبراني</p>
                                 </div>
-                                <div>
-                                    <span class="font-bold text-blue-900">جهة الاتصال:</span>
+                                <div class="bg-white p-4 rounded-xl border border-slate-100">
+                                    <span class="font-extrabold text-blue-900 flex items-center gap-2 mb-2">
+                                        <i class="fas fa-phone text-amber-400"></i> جهة الاتصال
+                                    </span>
                                     <p class="text-slate-600">091xxxxxxx</p>
                                 </div>
                             </div>
@@ -350,234 +578,361 @@
             </div>
         </div>
 
-        <!-- ====== خطط الاشتراك (مرئية دائماً) ====== -->
-        <section class="mb-12">
-            <h3 class="text-2xl font-bold text-blue-900 text-center mb-8">خطط الاشتراك</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- الخطة المجانية -->
-                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm text-center">
-                    <i class="fas fa-user text-4xl text-blue-900 mb-4"></i>
-                    <h4 class="text-xl font-bold text-slate-900 mb-2">باحث عن عمل</h4>
-                    <p class="text-3xl font-bold text-blue-900 mb-4">مجاني</p>
-                    <ul class="text-sm text-slate-600 space-y-2 mb-6">
-                        <li><i class="fas fa-check text-green-600 ml-2"></i> إنشاء حساب وتقديم على الوظائف</li>
-                        <li><i class="fas fa-check text-green-600 ml-2"></i> سيرة ذاتية احترافية</li>
-                        <li><i class="fas fa-check text-green-600 ml-2"></i> دورات تدريبية مجانية</li>
-                        <li><i class="fas fa-check text-green-600 ml-2"></i> إشعارات الوظائف</li>
+        <!-- ====== خطط الاشتراك ====== -->
+        <section class="mb-16">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-extrabold text-blue-900 section-title">خطط الاشتراك</h3>
+                <p class="text-slate-500 mt-6 text-lg">اختر الخطة المناسبة لك وابدأ رحلتك المهنية</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- باحث عن عمل - 1 دينار -->
+                <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-xl card-glow text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-tie text-3xl text-blue-900"></i>
+                    </div>
+                    <h4 class="text-2xl font-extrabold text-slate-900 mb-2">باحث عن عمل</h4>
+                    <div class="text-5xl font-black text-blue-900 my-6">1 <span class="text-2xl text-slate-500">دينار</span></div>
+                    <p class="text-sm text-slate-500 mb-6">اشتراك مدى الحياة - فرصتك لبدء مستقبلك المهني</p>
+                    <ul class="text-right space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-slate-600">
+                            <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                            إنشاء حساب وتقديم على الوظائف
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-600">
+                            <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                            سيرة ذاتية احترافية مجانية
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-600">
+                            <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                            دورات تدريبية مجانية
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-600">
+                            <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                            إشعارات فورية بالوظائف
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-600">
+                            <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                            دعم فني عبر واتساب
+                        </li>
                     </ul>
-                    <button onclick="openModal('register')" class="w-full px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition-colors">ابدأ الآن</button>
+                    <button onclick="openModal('register')" class="w-full btn-primary text-white font-extrabold py-4 rounded-2xl shadow-lg transition-all text-lg">
+                        <i class="fas fa-user-plus ml-2"></i> ابدأ بـ 1 دينار
+                    </button>
                 </div>
-                <!-- خطة الشركات (مدى الحياة) -->
-                <div class="bg-white p-8 rounded-2xl border-2 border-amber-400 shadow-lg text-center relative">
-                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-amber-400 text-blue-950 px-4 py-1 rounded-full text-xs font-bold">الأكثر طلباً</div>
-                    <i class="fas fa-building text-4xl text-amber-500 mb-4"></i>
-                    <h4 class="text-xl font-bold text-slate-900 mb-2">شركة</h4>
-                    <p class="text-3xl font-bold text-blue-900 mb-4">50 دينار <span class="text-lg text-slate-500">/مدى الحياة</span></p>
-                    <ul class="text-sm text-slate-600 space-y-2 mb-6">
-                        <li><i class="fas fa-check text-green-600 ml-2"></i> نشر إعلانات غير محدودة</li>
-                        <li><i class="fas fa-check text-green-600 ml-2"></i> استقبال طلبات المتقدمين</li>
-                        <li><i class="fas fa-check text-green-600 ml-2"></i> لوحة تحكم متقدمة</li>
-                        <li><i class="fas fa-check text-green-600 ml-2"></i> دعم فني متميز</li>
+
+                <!-- شركة - 50 دينار مدى الحياة -->
+                <div class="bg-white p-8 rounded-3xl border-2 border-amber-400 shadow-2xl card-glow text-center relative transform scale-105">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-l from-amber-400 to-yellow-300 text-blue-950 px-6 py-2 rounded-full text-sm font-extrabold shadow-lg">
+                        <i class="fas fa-crown ml-1"></i> الأكثر طلباً
+                    </div>
+                    <div class="w-16 h-16 bg-gradient-to-br from-amber-100 to-amber-200 rounded-2xl flex items-center justify-center mx-auto mb-4 mt-4">
+                        <i class="fas fa-building text-3xl text-amber-600"></i>
+                    </div>
+                    <h4 class="text-2xl font-extrabold text-slate-900 mb-2">شركة</h4>
+                    <div class="text-5xl font-black text-blue-900 my-6">50 <span class="text-2xl text-slate-500">دينار</span></div>
+                    <p class="text-sm text-slate-500 mb-6">اشتراك مدى الحياة - ابحث عن أفضل الكفاءات</p>
+                    <ul class="text-right space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-slate-600">
+                            <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                            نشر إعلانات غير محدودة
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-600">
+                            <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                            استقبال طلبات المتقدمين
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-600">
+                            <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                            لوحة تحكم متقدمة
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-600">
+                            <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                            أدوات فرز وفلترة
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-600">
+                            <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                            دعم فني متميز 24/7
+                        </li>
                     </ul>
-                    <button onclick="openModal('company')" class="w-full px-4 py-2 bg-amber-500 text-blue-950 rounded-lg hover:bg-amber-600 transition-colors font-bold">اشترك الآن</button>
+                    <button onclick="openModal('company')" class="w-full btn-gold text-blue-950 font-extrabold py-4 rounded-2xl shadow-lg transition-all text-lg">
+                        <i class="fas fa-crown ml-2"></i> اشترك بـ 50 دينار
+                    </button>
                 </div>
-                <!-- خطة جهة توظيف (مدى الحياة) -->
-                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm text-center">
-                    <i class="fas fa-handshake text-4xl text-purple-600 mb-4"></i>
-                    <h4 class="text-xl font-bold text-slate-900 mb-2">جهة توظيف</h4>
-                    <p class="text-3xl font-bold text-purple-600 mb-4">50 دينار <span class="text-lg text-slate-500">/مدى الحياة</span></p>
-                    <ul class="text-sm text-slate-600 space-y-2 mb-6">
-                        <li><i class="fas fa-check text-green-600 ml-2"></i> وساطة وتوظيف الكفاءات</li>
-                        <li><i class="fas fa-check text-green-600 ml-2"></i> شبكة علاقات واسعة</li>
-                        <li><i class="fas fa-check text-green-600 ml-2"></i> أدوات فرز متقدمة</li>
-                        <li><i class="fas fa-check text-green-600 ml-2"></i> تقارير وإحصائيات</li>
+
+                <!-- جهة توظيف - 50 دينار مدى الحياة -->
+                <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-xl card-glow text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-handshake text-3xl text-purple-600"></i>
+                    </div>
+                    <h4 class="text-2xl font-extrabold text-slate-900 mb-2">جهة توظيف</h4>
+                    <div class="text-5xl font-black text-purple-600 my-6">50 <span class="text-2xl text-slate-500">دينار</span></div>
+                    <p class="text-sm text-slate-500 mb-6">اشتراك مدى الحياة - وسّع شبكة علاقاتك</p>
+                    <ul class="text-right space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-slate-600">
+                            <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                            وساطة وتوظيف الكفاءات
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-600">
+                            <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                            شبكة علاقات واسعة
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-600">
+                            <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                            أدوات فرز متقدمة
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-600">
+                            <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                            تقارير وإحصائيات
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-600">
+                            <i class="fas fa-check-circle text-green-500 text-lg"></i>
+                            دعم فني متميز
+                        </li>
                     </ul>
-                    <button onclick="openModal('agency')" class="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">اشترك الآن</button>
+                    <button onclick="openModal('agency')" class="w-full bg-gradient-to-r from-purple-600 to-purple-500 text-white font-extrabold py-4 rounded-2xl shadow-lg transition-all text-lg hover:from-purple-700 hover:to-purple-600">
+                        <i class="fas fa-handshake ml-2"></i> اشترك بـ 50 دينار
+                    </button>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- ====== قسم تحفيزي (أسفل الصفحة) ====== -->
-    <section class="bg-blue-900 text-white py-16 px-4">
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-            <div class="space-y-3 text-center md:text-right">
-                <div class="inline-block bg-blue-800 text-amber-300 p-3 rounded-lg mb-2">
-                    <i class="fas fa-rocket text-2xl"></i>
-                </div>
-                <h3 class="text-2xl font-bold">انضم إلى أكثر من 10,000 كفاءة وطنية</h3>
-                <p class="text-blue-200 max-w-xl text-sm font-light leading-relaxed">
-                    سجل الآن وابدأ رحلتك المهنية. منصتنا تجمعك بأفضل الفرص والتدريبات في ليبيا.
-                </p>
+    <!-- ====== قسم تحفيزي للاشتراك ====== -->
+    <section class="bg-gradient-to-l from-blue-900 via-blue-800 to-blue-900 text-white py-20 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 20px 20px;"></div>
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <i class="fas fa-rocket text-6xl text-amber-400 mb-6 floating"></i>
+            <h3 class="text-4xl font-extrabold mb-4">انضم إلى أكثر من 10,000 كفاءة وطنية</h3>
+            <p class="text-xl text-blue-200 max-w-2xl mx-auto mb-8">
+                مستقبلك المهني يبدأ اليوم. سجل الآن وابدأ رحلتك نحو النجاح مع منصة كفاءات الوطنية.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button onclick="openModal('register')" class="px-10 py-5 btn-gold text-blue-950 font-extrabold text-xl rounded-2xl shadow-2xl transition-all inline-flex items-center gap-3">
+                    <i class="fas fa-user-plus"></i>
+                    سجل الآن بـ 1 دينار فقط
+                </button>
+                <a href="https://wa.me/218918756368" target="_blank" class="px-8 py-5 bg-green-500 hover:bg-green-600 text-white font-bold text-lg rounded-2xl shadow-lg transition-all inline-flex items-center gap-3">
+                    <i class="fab fa-whatsapp"></i>
+                    تواصل مع الدعم الفني
+                </a>
             </div>
-            <button onclick="openModal('register')" class="shrink-0 bg-amber-400 hover:bg-amber-500 text-blue-950 font-bold px-8 py-4 rounded-xl shadow-lg transition-all text-base">
-                سجل مجاناً الآن
-            </button>
         </div>
     </section>
 
     <!-- ====== الفوتر ====== -->
-    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div class="text-center sm:text-right">
-                <p class="font-bold text-slate-200">منصة كفاءات الوطنية © 2026</p>
-                <p class="text-xs text-slate-500 mt-1">مبادرة رقمية لدعم الكفاءات الوطنية.</p>
+    <footer class="bg-slate-900 text-slate-400 py-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="bg-gradient-to-br from-blue-800 to-blue-600 text-amber-400 p-3 rounded-xl font-extrabold text-xl">
+                            كفاءات
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-extrabold text-white">منصة كفاءات الوطنية</h4>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-500 leading-relaxed max-w-md">
+                        المنصة الرسمية للتوظيف والتدريب في ليبيا. مبادرة رقمية وطنية لدعم الكفاءات الشابة وتمكينهم من الوصول إلى فرص العمل المناسبة.
+                    </p>
+                </div>
+                <div>
+                    <h5 class="font-extrabold text-white mb-4">روابط سريعة</h5>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">الرئيسية</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">الوظائف</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">الدورات التدريبية</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">صانع السيرة الذاتية</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-extrabold text-white mb-4">الدعم الفني</h5>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="https://wa.me/218918756368" target="_blank" class="hover:text-green-400 transition-colors flex items-center gap-2">
+                            <i class="fab fa-whatsapp text-green-500"></i> واتساب: 0918756368
+                        </a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">الشروط والأحكام</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">سياسة الخصوصية</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">الأسئلة الشائعة</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="flex gap-6 text-xs font-medium">
-                <a href="#" class="hover:text-white transition-colors">الشروط والأحكام</a>
-                <a href="#" class="hover:text-white transition-colors">سياسة الخصوصية</a>
-                <a href="#" class="hover:text-white transition-colors">الدعم الفني</a>
+            <div class="border-t border-slate-800 pt-8 text-center text-sm text-slate-500">
+                <p class="font-bold text-slate-300">منصة كفاءات الوطنية © 2026</p>
+                <p class="mt-2">جميع الحقوق محفوظة - وزارة العمل والتأهيل</p>
             </div>
         </div>
     </footer>
 
-    <!-- ====== النوافذ المنبثقة (Modals) ====== -->
-    <div id="modalOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4" onclick="closeModal(event)">
-        <div id="modalContent" class="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-8" onclick="event.stopPropagation()">
-            <div id="modalBody"></div>
+    <!-- ====== النوافذ المنبثقة ====== -->
+    <div id="modalOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4" onclick="closeModal(event)">
+        <div id="modalContent" class="bg-white rounded-3xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
+            <div id="modalBody" class="p-8"></div>
         </div>
     </div>
 
     <script>
-        // ====== متغير لتخزين هوية المستخدم المختارة ======
+        // ====== متغير الهوية ======
         let selectedIdentity = null;
 
-        // ====== دوال اختيار الهوية ======
+        // ====== اختيار الهوية ======
         function selectIdentity(type, element) {
-            // إزالة التحديد من الكل
             document.querySelectorAll('.identity-card').forEach(el => el.classList.remove('selected'));
-            // إضافة التحديد للعنصر المختار
             element.classList.add('selected');
             selectedIdentity = type;
-            
-            // إظهار شريط البحث
             document.getElementById('searchBar').classList.remove('hidden');
         }
 
-        // ====== دوال التبويبات ======
+        // ====== التبويبات ======
         function switchTab(tabId, btn) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(el => {
-                el.classList.remove('text-blue-900', 'border-b-2', 'border-blue-900', 'bg-blue-50');
-                el.classList.add('text-slate-500');
+                el.classList.remove('bg-blue-900', 'text-white', 'shadow-md');
+                el.classList.add('text-slate-500', 'bg-transparent');
             });
             document.getElementById(tabId).classList.add('active');
-            btn.classList.add('text-blue-900', 'border-b-2', 'border-blue-900', 'bg-blue-50');
-            btn.classList.remove('text-slate-500');
+            btn.classList.add('bg-blue-900', 'text-white', 'shadow-md');
+            btn.classList.remove('text-slate-500', 'bg-transparent');
         }
 
-        // ====== دوال المودال ======
+        // ====== المودالات ======
         function openModal(type) {
             const overlay = document.getElementById('modalOverlay');
             const body = document.getElementById('modalBody');
             
             if (type === 'login') {
                 body.innerHTML = `
-                    <div class="text-center mb-6">
-                        <i class="fas fa-user-circle text-5xl text-blue-900 mb-3"></i>
-                        <h3 class="text-2xl font-bold text-slate-900">تسجيل الدخول</h3>
-                        <p class="text-slate-500">أهلاً بعودتك! سجل دخولك باستخدام رقم هاتفك</p>
+                    <div class="text-center mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-user-circle text-4xl text-blue-900"></i>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-slate-900">تسجيل الدخول</h3>
+                        <p class="text-slate-500 mt-2">أهلاً بعودتك! سجل دخولك لمواصلة رحلتك المهنية</p>
                     </div>
-                    <div class="space-y-4">
+                    <div class="space-y-5">
                         <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-1">رقم الهاتف</label>
-                            <input type="tel" placeholder="091xxxxxxx" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <label class="block text-sm font-bold text-slate-700 mb-2">رقم الهاتف</label>
+                            <input type="tel" placeholder="091xxxxxxx" class="input-field w-full px-4 py-3 rounded-xl">
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-1">كلمة المرور</label>
-                            <input type="password" placeholder="••••••••" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <label class="block text-sm font-bold text-slate-700 mb-2">كلمة المرور</label>
+                            <input type="password" placeholder="••••••••" class="input-field w-full px-4 py-3 rounded-xl">
                         </div>
-                        <button class="w-full bg-blue-900 text-white py-3 rounded-lg font-bold hover:bg-blue-800 transition-colors">دخول</button>
-                        <p class="text-center text-sm text-slate-500">ليس لديك حساب؟ <a href="#" onclick="openModal('register')" class="text-blue-900 font-semibold">سجل الآن</a></p>
+                        <button class="w-full btn-primary text-white font-extrabold py-4 rounded-2xl shadow-lg transition-all text-lg">
+                            <i class="fas fa-sign-in-alt ml-2"></i> دخول
+                        </button>
+                        <p class="text-center text-sm text-slate-500">
+                            ليس لديك حساب؟ 
+                            <a href="#" onclick="openModal('register')" class="text-blue-900 font-extrabold">سجل الآن</a>
+                        </p>
                     </div>
                 `;
             } else if (type === 'register') {
                 body.innerHTML = `
-                    <div class="text-center mb-6">
-                        <i class="fas fa-user-plus text-5xl text-blue-900 mb-3"></i>
-                        <h3 class="text-2xl font-bold text-slate-900">إنشاء حساب جديد</h3>
-                        <p class="text-slate-500">انضم إلى آلاف الكفاءات الوطنية. سجل برقم هاتفك الآن</p>
+                    <div class="text-center mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-user-plus text-4xl text-green-600"></i>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-slate-900">إنشاء حساب جديد</h3>
+                        <p class="text-slate-500 mt-2">انضم إلى آلاف الكفاءات الوطنية - اشتراك 1 دينار فقط مدى الحياة</p>
                     </div>
-                    <div class="space-y-4">
+                    <div class="space-y-5">
                         <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-1">رقم الهاتف</label>
-                            <input type="tel" placeholder="091xxxxxxx" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <label class="block text-sm font-bold text-slate-700 mb-2">رقم الهاتف</label>
+                            <input type="tel" placeholder="091xxxxxxx" class="input-field w-full px-4 py-3 rounded-xl">
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-1">الاسم الكامل</label>
-                            <input type="text" placeholder="الاسم الثلاثي" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <label class="block text-sm font-bold text-slate-700 mb-2">الاسم الكامل</label>
+                            <input type="text" placeholder="الاسم الثلاثي" class="input-field w-full px-4 py-3 rounded-xl">
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-1">كلمة المرور</label>
-                            <input type="password" placeholder="أدخل كلمة مرور قوية" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <label class="block text-sm font-bold text-slate-700 mb-2">كلمة المرور</label>
+                            <input type="password" placeholder="أدخل كلمة مرور قوية" class="input-field w-full px-4 py-3 rounded-xl">
                         </div>
-                        <button class="w-full bg-blue-900 text-white py-3 rounded-lg font-bold hover:bg-blue-800 transition-colors">إنشاء الحساب</button>
-                        <p class="text-center text-sm text-slate-500">لديك حساب بالفعل؟ <a href="#" onclick="openModal('login')" class="text-blue-900 font-semibold">تسجيل الدخول</a></p>
+                        <button class="w-full btn-primary text-white font-extrabold py-4 rounded-2xl shadow-lg transition-all text-lg">
+                            <i class="fas fa-check-circle ml-2"></i> إنشاء الحساب بـ 1 دينار
+                        </button>
+                        <p class="text-center text-sm text-slate-500">
+                            لديك حساب بالفعل؟ 
+                            <a href="#" onclick="openModal('login')" class="text-blue-900 font-extrabold">تسجيل الدخول</a>
+                        </p>
                     </div>
                 `;
             } else if (type === 'company') {
                 body.innerHTML = `
-                    <div class="text-center mb-6">
-                        <i class="fas fa-building text-5xl text-amber-500 mb-3"></i>
-                        <h3 class="text-2xl font-bold text-slate-900">اشتراك الشركات</h3>
-                        <p class="text-slate-500">50 دينار - اشتراك مدى الحياة. اختر طريقة الدفع</p>
+                    <div class="text-center mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-amber-100 to-amber-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-building text-4xl text-amber-600"></i>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-slate-900">اشتراك الشركات</h3>
+                        <p class="text-slate-500 mt-2">50 دينار فقط - اشتراك مدى الحياة - اختر طريقة الدفع</p>
                     </div>
-                    <div class="space-y-4">
+                    <div class="space-y-5">
                         <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-1">اسم الشركة</label>
-                            <input type="text" placeholder="الاسم التجاري" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <label class="block text-sm font-bold text-slate-700 mb-2">اسم الشركة</label>
+                            <input type="text" placeholder="الاسم التجاري للشركة" class="input-field w-full px-4 py-3 rounded-xl">
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-1">رقم هاتف الشركة</label>
-                            <input type="tel" placeholder="091xxxxxxx" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <label class="block text-sm font-bold text-slate-700 mb-2">رقم هاتف الشركة</label>
+                            <input type="tel" placeholder="091xxxxxxx" class="input-field w-full px-4 py-3 rounded-xl">
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-1">طريقة الدفع</label>
-                            <select id="paymentMethod" onchange="showPaymentDetails()" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <label class="block text-sm font-bold text-slate-700 mb-2">طريقة الدفع</label>
+                            <select id="paymentMethod" onchange="showPaymentDetails()" class="input-field w-full px-4 py-3 rounded-xl">
                                 <option value="">اختر طريقة الدفع</option>
                                 <option value="card">بطاقة مدار</option>
                                 <option value="libyana">ليبيانا موبايل</option>
                                 <option value="bank">حوالة مصرفية</option>
                             </select>
                         </div>
-                        <div id="paymentDetails" class="hidden p-4 bg-slate-50 rounded-lg border border-slate-200 text-sm space-y-2">
-                            <p class="font-semibold text-slate-700">تفاصيل الدفع:</p>
-                            <p id="paymentInfo" class="text-slate-600">اختر طريقة دفع أولاً</p>
+                        <div id="paymentDetails" class="hidden p-5 bg-slate-50 rounded-2xl border border-slate-200 text-sm space-y-3">
+                            <p class="font-extrabold text-slate-700 flex items-center gap-2">
+                                <i class="fas fa-info-circle text-blue-900"></i> تفاصيل الدفع:
+                            </p>
+                            <p id="paymentInfo" class="text-slate-600 leading-relaxed">اختر طريقة دفع أولاً</p>
                         </div>
-                        <button class="w-full bg-amber-500 text-blue-950 py-3 rounded-lg font-bold hover:bg-amber-600 transition-colors">تأكيد الاشتراك</button>
+                        <button class="w-full btn-gold text-blue-950 font-extrabold py-4 rounded-2xl shadow-lg transition-all text-lg">
+                            <i class="fas fa-check-circle ml-2"></i> تأكيد الاشتراك بـ 50 دينار
+                        </button>
                     </div>
                 `;
             } else if (type === 'agency') {
                 body.innerHTML = `
-                    <div class="text-center mb-6">
-                        <i class="fas fa-handshake text-5xl text-purple-600 mb-3"></i>
-                        <h3 class="text-2xl font-bold text-slate-900">اشتراك جهة توظيف</h3>
-                        <p class="text-slate-500">50 دينار - اشتراك مدى الحياة. اختر طريقة الدفع</p>
+                    <div class="text-center mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-handshake text-4xl text-purple-600"></i>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-slate-900">اشتراك جهة توظيف</h3>
+                        <p class="text-slate-500 mt-2">50 دينار فقط - اشتراك مدى الحياة - اختر طريقة الدفع</p>
                     </div>
-                    <div class="space-y-4">
+                    <div class="space-y-5">
                         <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-1">اسم الجهة</label>
-                            <input type="text" placeholder="اسم جهة التوظيف" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <label class="block text-sm font-bold text-slate-700 mb-2">اسم الجهة</label>
+                            <input type="text" placeholder="اسم جهة التوظيف" class="input-field w-full px-4 py-3 rounded-xl">
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-1">رقم الهاتف</label>
-                            <input type="tel" placeholder="091xxxxxxx" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <label class="block text-sm font-bold text-slate-700 mb-2">رقم الهاتف</label>
+                            <input type="tel" placeholder="091xxxxxxx" class="input-field w-full px-4 py-3 rounded-xl">
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-1">طريقة الدفع</label>
-                            <select id="paymentMethodAgency" onchange="showPaymentDetailsAgency()" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <label class="block text-sm font-bold text-slate-700 mb-2">طريقة الدفع</label>
+                            <select id="paymentMethodAgency" onchange="showPaymentDetailsAgency()" class="input-field w-full px-4 py-3 rounded-xl">
                                 <option value="">اختر طريقة الدفع</option>
                                 <option value="card">بطاقة مدار</option>
                                 <option value="libyana">ليبيانا موبايل</option>
                                 <option value="bank">حوالة مصرفية</option>
                             </select>
                         </div>
-                        <div id="paymentDetailsAgency" class="hidden p-4 bg-slate-50 rounded-lg border border-slate-200 text-sm space-y-2">
-                            <p class="font-semibold text-slate-700">تفاصيل الدفع:</p>
-                            <p id="paymentInfoAgency" class="text-slate-600">اختر طريقة دفع أولاً</p>
+                        <div id="paymentDetailsAgency" class="hidden p-5 bg-slate-50 rounded-2xl border border-slate-200 text-sm space-y-3">
+                            <p class="font-extrabold text-slate-700 flex items-center gap-2">
+                                <i class="fas fa-info-circle text-purple-600"></i> تفاصيل الدفع:
+                            </p>
+                            <p id="paymentInfoAgency" class="text-slate-600 leading-relaxed">اختر طريقة دفع أولاً</p>
                         </div>
-                        <button class="w-full bg-purple-600 text-white py-3 rounded-lg font-bold hover:bg-purple-700 transition-colors">تأكيد الاشتراك</button>
+                        <button class="w-full bg-gradient-to-r from-purple-600 to-purple-500 text-white font-extrabold py-4 rounded-2xl shadow-lg transition-all text-lg hover:from-purple-700 hover:to-purple-600">
+                            <i class="fas fa-check-circle ml-2"></i> تأكيد الاشتراك بـ 50 دينار
+                        </button>
                     </div>
                 `;
             }
