@@ -1,166 +1,199 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المنصة الوطنية للتشغيل والتدريب</title>
-    <!-- استدعاء خط Cairo الأنيق والمناسب للمواقع الحكومية -->
+    <title>منصة كفاءات - المنصة الوطنية للتشغيل والتدريب</title>
+    <!-- استدعاء خط Cairo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- استدعاء Tailwind CSS عبر الـ CDN لتشغيل التصميم مباشرة -->
+    <!-- استدعاء Tailwind CSS و FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- استدعاء مكتبة الأيقونات FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-        }
+        body { font-family: 'Cairo', sans-serif; }
+        *, *::before, *::after { box-sizing: border-box; }
+        @page { size: A4; margin: 0; }
     </style>
 </head>
 <body class="min-h-screen bg-slate-50 text-slate-800 antialiased">
 
-    <!-- 1. الهيدر (Header) -->
+    <!-- 1. شريط الإعلانات والأسعار التوضيحي -->
+    <div class="bg-amber-500 text-blue-950 text-xs font-bold py-2 px-4 text-center flex flex-wrap justify-center gap-6 border-b border-amber-600">
+        <span><i class="fas fa-user-check ml-1"></i> اشتراك المواطنين: <span class="underline">مجاني بالكامل دائمًا</span></span>
+        <span><i class="fas fa-building ml-1"></i> اشتراك Companies: <span class="underline">50 دينار ليبي مدى الحياة</span></span>
+        <span><i class="fas fa-graduation-cap ml-1"></i> جميع الدورات التدريبية: <span class="underline">مجانية 100%</span></span>
+    </div>
+
+    <!-- 2. الهيدر الحكومي الاحترافي -->
     <header class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <!-- شعار ذو طابع مؤسساتي حكومي -->
-                <div class="bg-blue-900 text-amber-400 p-2.5 rounded-lg shadow-md font-bold text-xl tracking-wider">
-                    LY
-                </div>
+                <div class="bg-blue-900 text-amber-400 p-2.5 rounded-lg shadow-md font-bold text-xl tracking-wider">LY</div>
                 <div>
-                    <h1 class="text-xl font-bold text-blue-900 tracking-tight">المنصة الوطنية للتشغيل</h1>
-                    <p class="text-xs text-slate-500 font-medium">وزارة العمل والتأهيل - النسخة التجريبية</p>
+                    <h1 class="text-xl font-bold text-blue-900 tracking-tight">منصة كفاءات الرقمية</h1>
+                    <p class="text-xs text-slate-500 font-medium">المنصة الوطنية الموحدة للتشغيل والتدريب</p>
                 </div>
             </div>
-            
             <nav class="hidden md:flex items-center gap-8 font-medium text-slate-600">
-                <a href="#" class="text-blue-900 border-b-2 border-blue-900 pb-1">الرئيسية</a>
-                <a href="#" class="hover:text-blue-900 transition-colors">ابحث عن وظيفة</a>
-                <a href="#" class="hover:text-blue-900 transition-colors">الدورات التدريبية</a>
-                <a href="#" class="hover:text-blue-900 transition-colors">صانع الـ CV</a>
+                <a href="#home" class="text-blue-900 border-b-2 border-blue-900 pb-1">الرئيسية</a>
+                <a href="#jobs" class="hover:text-blue-900 transition-colors">أحدث الوظائف</a>
+                <a href="#courses" class="hover:text-blue-900 transition-colors">الدورات المجانية</a>
+                <a href="#cv-section" class="hover:text-blue-900 transition-colors">إنشاء السيرة الذاتية</a>
             </nav>
-
             <div class="flex items-center gap-3">
-                <button class="px-4 py-2 text-sm font-semibold text-blue-900 hover:bg-slate-100 rounded-lg transition-colors">
-                    تسجيل الدخول
-                </button>
-                <button class="px-5 py-2.5 text-sm font-semibold bg-blue-900 hover:bg-blue-800 text-white rounded-lg shadow-sm transition-all">
-                    إنشاء حساب جديد
+                <button onclick="document.getElementById('auth-modal').classList.remove('hidden')" class="px-5 py-2.5 text-sm font-semibold bg-blue-900 hover:bg-blue-800 text-white rounded-lg shadow-sm transition-all">
+                    <i class="fas fa-sign-in-alt ml-1"></i> دخول / تسجيل بالهاتف
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- 2. القسم الرئيسي ومحرك البحث (Hero Section) -->
-    <section class="relative bg-gradient-to-b from-blue-950 to-slate-900 text-white py-20 px-4 overflow-hidden">
+    <!-- 3. القسم الرئيسي ومحرك البحث المتطور لكافة القطاعات -->
+    <section id="home" class="relative bg-gradient-to-b from-blue-950 to-slate-900 text-white py-16 px-4 overflow-hidden">
         <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#e2e8f0 1px, transparent 1px); background-size: 16px 16px;"></div>
         <div class="max-w-5xl mx-auto text-center relative z-10">
             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-blue-800/60 text-amber-300 border border-blue-700 mb-6">
-                <i class="fas fa-check-circle text-[10px]"></i> رؤية ليبيا لتمكين الشباب والخريجين
+                <i class="fas fa-shield-alt text-[10px]"></i> مظلة رقمية آمنة وموثوقة لجميع القطاعات والخدمات في ليبيا
             </span>
-            <h2 class="text-4xl sm:text-5xl font-extrabold mb-6 leading-tight tracking-tight">
-                بوابتك الرقمية نحو <span class="text-amber-400">سوق العمل الليبي</span>
+            <h2 class="text-3xl sm:text-5xl font-extrabold mb-6 leading-tight">
+                ربط الكفاءات الليبية بفرص العمل <span class="text-amber-400">الحقيقية</span>
             </h2>
-            <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-                منصة موحدة تجمع باحثي العمل بالشركات الوطنية، وتوفر بيئة متكاملة لتطوير المهارات عبر دورات تدريبية معتمدة.
+            <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto mb-10 font-light">
+                سواء كنت طالبًا، خريجًا، أو صاحب شركة مواد غذائية، تقنية، أو مقاولات؛ كفاءات هي منصتك الرسمية الأولى.
             </p>
 
-            <!-- بار البحث الذكي -->
+            <!-- بار البحث الشامل -->
             <div class="bg-white p-3 rounded-xl shadow-2xl max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-3 text-slate-800">
                 <div class="flex items-center gap-2 px-3 border-b md:border-b-0 md:border-l border-slate-200 pb-2 md:pb-0">
                     <i class="fas fa-search text-slate-400"></i>
-                    <input type="text" placeholder="مسمى الوظيفة أو المهارة..." class="w-full focus:outline-none text-sm bg-transparent" />
+                    <select class="w-full focus:outline-none text-sm bg-transparent text-slate-700 font-medium">
+                        <option value="">اختر المسمى الوظيفي أو الخدمة...</option>
+                        <option>مدير مبيعات مواد غذائية</option>
+                        <option>أخصائي تقني / مبرمج</option>
+                        <option>موظف كشير وتجهيز رفوف</option>
+                        <option>مهندس مدني / مقاولات</option>
+                        <option>فني صيانة وتكييف</option>
+                        <option>سائق توصيل ونقل بضائع</option>
+                        <option>محاسب قانوني</option>
+                        <option>موظف استقبال وإدارة</option>
+                    </select>
                 </div>
                 <div class="flex items-center gap-2 px-3 border-b md:border-b-0 md:border-l border-slate-200 pb-2 md:pb-0">
-                    <i class="fas fa-map-marker-alt text-slate-400"></i>
-                    <select class="w-full focus:outline-none text-sm bg-transparent text-slate-600">
-                        <option>كل المدن الليبية</option>
-                        <option>طرابلس</option>
-                        <option>بنغازي</option>
-                        <option>مصراتة</option>
-                        <option>سبها</option>
-                        <option>عن بُعد</option>
+                    <i class="fas fa-tags text-slate-400"></i>
+                    <select class="w-full focus:outline-none text-sm bg-transparent text-slate-700">
+                        <option value="">تصنيف القطاع الغذائي والتجاري...</option>
+                        <option>صناعة وتجارة المواد الغذائية</option>
+                        <option>الالكترونيات والتقنية</option>
+                        <option>المهن الحرة والصيانة</option>
+                        <option>المقاولات والإنشاءات</option>
+                        <option>الصحة والأدوية</option>
+                        <option>التعليم والتدريب</option>
                     </select>
                 </div>
                 <button class="w-full bg-amber-500 hover:bg-amber-600 text-blue-950 font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2 shadow-md">
-                    <span>ابحث الآن</span>
+                    <span>ابحث عن الفرص</span>
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- 3. محتوى المنصة الرئيسي (الوظائف والدورات) -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+    <!-- 4. محتوى الوظائف والدورات (أمثلة لشركات حقيقية ومواد غذائية وتقنية) -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
-            <!-- قسم الوظائف (يأخذ مساحة أكبر 2/3) -->
-            <div class="lg:col-span-2 space-y-6">
-                <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+            <!-- قسم الوظائف المدرجة (2/3) -->
+            <div id="jobs" class="lg:col-span-2 space-y-6">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-200">
                     <div class="flex items-center gap-2">
                         <i class="fas fa-briefcase text-blue-900 text-xl"></i>
-                        <h3 class="text-xl font-bold text-blue-900">أحدث الفرص الوظيفية المدرجة</h3>
+                        <h3 class="text-xl font-bold text-blue-900">طلبات التوظيف الحالية والشركات المشتركة</h3>
                     </div>
-                    <a href="#" class="text-sm font-semibold text-blue-700 hover:text-blue-900 flex items-center gap-1">
-                        عرض الكل <i class="fas fa-arrow-left text-xs mr-1"></i>
-                    </a>
                 </div>
 
                 <div class="space-y-4">
-                    <!-- وظيفة 1 -->
-                    <div class="bg-white p-5 rounded-xl border border-slate-200 hover:border-blue-300 shadow-sm hover:shadow-md transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <!-- مثال 1: قطاع المواد الغذائية والتجارة -->
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 hover:border-blue-300 shadow-sm transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div class="space-y-2">
-                            <h4 class="font-bold text-lg text-slate-900 hover:text-blue-800 cursor-pointer">مطوّر واجهات ويب</h4>
-                            <div class="flex flex-wrap gap-4 text-xs font-medium text-slate-500">
-                                <span class="flex items-center gap-1"><i class="fas fa-building"></i> شركة تقنية ناشئة</span>
-                                <span class="flex items-center gap-1"><i class="fas fa-map-marker-alt"></i> طرابلس (أو عن بُعد)</span>
-                                <span class="flex items-center gap-1"><i class="far fa-calendar-alt"></i> منذ ساعتين</span>
+                            <div class="flex items-center gap-2">
+                                <span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-0.5 rounded-md font-bold">قطاع المواد الغذائية</span>
+                                <span class="text-xs text-slate-400"><i class="fas fa-shield-alt"></i> شركة مشتركة (مدى الحياة)</span>
+                            </div>
+                            <h4 class="font-bold text-lg text-slate-900">أخصائي مبيعات ومشرف فرع وتوزيع</h4>
+                            <p class="text-sm text-slate-600">شركة النسيم للصناعات الغذائية والمستندات</p>
+                            <div class="flex flex-wrap gap-4 text-xs text-slate-500 pt-1">
+                                <span><i class="fas fa-map-marker-alt"></i> طرابلس - طريق المطار</span>
+                                <span><i class="far fa-clock"></i> دوام كامل</span>
+                                <span><i class="fas fa-money-bill-wave text-emerald-600"></i> مرتب حافز وممتاز</span>
                             </div>
                         </div>
-                        <div class="flex items-center justify-between sm:justify-end gap-3 border-t sm:border-t-0 pt-3 sm:pt-0">
-                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-100">دوام كامل</span>
-                            <button class="px-4 py-2 text-xs font-bold bg-slate-900 text-white rounded-md hover:bg-slate-800 transition-colors">تقدم الآن</button>
-                        </div>
+                        <button class="sm:self-center px-4 py-2 text-xs font-bold bg-blue-900 text-white rounded-md hover:bg-blue-800 transition-colors shrink-0">تقدم للوظيفة</button>
                     </div>
 
-                    <!-- وظيفة 2 -->
-                    <div class="bg-white p-5 rounded-xl border border-slate-200 hover:border-blue-300 shadow-sm hover:shadow-md transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <!-- مثال 2: قطاع التقنية والاتصالات -->
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 hover:border-blue-300 shadow-sm transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div class="space-y-2">
-                            <h4 class="font-bold text-lg text-slate-900 hover:text-blue-800 cursor-pointer">محاسب مالي مخضرم</h4>
-                            <div class="flex flex-wrap gap-4 text-xs font-medium text-slate-500">
-                                <span class="flex items-center gap-1"><i class="fas fa-building"></i> شركة المدار للاستيراد</span>
-                                <span class="flex items-center gap-1"><i class="fas fa-map-marker-alt"></i> بنغازي</span>
-                                <span class="flex items-center gap-1"><i class="far fa-calendar-alt"></i> منذ يوم</span>
+                            <div class="flex items-center gap-2">
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2.5 py-0.5 rounded-md font-bold">تقنية وتطوير</span>
+                            </div>
+                            <h4 class="font-bold text-lg text-slate-900">مطور تطبيقات ومواقع لوحة تحكم</h4>
+                            <p class="text-sm text-slate-600">شركة التقنية والمعلوماتية الوطنية</p>
+                            <div class="flex flex-wrap gap-4 text-xs text-slate-500 pt-1">
+                                <span><i class="fas fa-map-marker-alt"></i> بنغازي (أو عن بُعد)</span>
+                                <span><i class="far fa-clock"></i> عقد جزئي / مستقل</span>
                             </div>
                         </div>
-                        <div class="flex items-center justify-between sm:justify-end gap-3 border-t sm:border-t-0 pt-3 sm:pt-0">
-                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-100">دوام كامل</span>
-                            <button class="px-4 py-2 text-xs font-bold bg-slate-900 text-white rounded-md hover:bg-slate-800 transition-colors">تقدم الآن</button>
+                        <button class="sm:self-center px-4 py-2 text-xs font-bold bg-blue-900 text-white rounded-md hover:bg-blue-800 transition-colors shrink-0">تقدم للوظيفة</button>
+                    </div>
+
+                    <!-- مثال 3: تجارة الجملة والتوزيع غذائي -->
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 hover:border-blue-300 shadow-sm transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2">
+                                <span class="bg-amber-100 text-amber-800 text-xs px-2.5 py-0.5 rounded-md font-bold">تخزين ومطاعم</span>
+                            </div>
+                            <h4 class="font-bold text-lg text-slate-900">أمين مخزن ومسؤول جرد بضائع</h4>
+                            <p class="text-sm text-slate-600">شركة السهل القابضة للمواد الغذائية</p>
+                            <div class="flex flex-wrap gap-4 text-xs text-slate-500 pt-1">
+                                <span><i class="fas fa-map-marker-alt"></i> مصراتة</span>
+                                <span><i class="far fa-clock"></i> دوام كامل</span>
+                            </div>
                         </div>
+                        <button class="sm:self-center px-4 py-2 text-xs font-bold bg-blue-900 text-white rounded-md hover:bg-blue-800 transition-colors shrink-0">تقدم للوظيفة</button>
                     </div>
                 </div>
             </div>
 
-            <!-- قسم الدورات التدريبية (1/3) -->
-            <div class="space-y-6">
-                <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+            <!-- قسم الدورات التدريبية المجانية (1/3) -->
+            <div id="courses" class="space-y-6">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-200">
                     <div class="flex items-center gap-2">
-                        <i class="fas fa-book text-blue-900 text-xl"></i>
-                        <h3 class="text-xl font-bold text-blue-900">دورات تدريبية قادمة</h3>
+                        <i class="fas fa-graduation-cap text-blue-900 text-xl"></i>
+                        <h3 class="text-xl font-bold text-blue-900">دورات تدريبية مجانية</h3>
                     </div>
                 </div>
 
                 <div class="space-y-4">
-                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
-                        <span class="inline-block px-2.5 py-0.5 rounded text-[11px] font-bold bg-amber-100 text-amber-800 border border-amber-200">تسجيل مفتوح</span>
-                        <h4 class="font-bold text-base text-slate-900 leading-snug">أساسيات الأمن السيبراني وحماية البيانات</h4>
-                        <p class="text-xs font-medium text-slate-500">مركز التكنولوجيا المتقدمة</p>
-                        <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs font-medium text-slate-400">
-                            <span>مصراتة / حضوري</span>
-                            <span class="text-blue-800 font-semibold">3 أسابيع</span>
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 bg-amber-500 text-blue-950 text-[10px] font-bold px-3 py-1 rounded-br-lg">منحة مجانية بالكامل</div>
+                        <h4 class="font-bold text-base text-slate-900 pt-2">إدارة مخازن المواد الغذائية والجرد الإلكتروني</h4>
+                        <p class="text-xs text-slate-500">معهد التدريب اللوجستي الوطني</p>
+                        <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs text-slate-400">
+                            <span>طرابلس / حضوري</span>
+                            <span class="text-blue-800 font-bold">أسبوعين</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 bg-amber-500 text-blue-950 text-[10px] font-bold px-3 py-1 rounded-br-lg">أونلاين مجاني</div>
+                        <h4 class="font-bold text-base text-slate-900 pt-2">التسويق والمبيعات لقطاع التجزئة والمحلات</h4>
+                        <p class="text-xs text-slate-500">أكاديمية رواد الأعمال الليبية</p>
+                        <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs text-slate-400">
+                            <span>عبر الإنترنت</span>
+                            <span class="text-blue-800 font-bold">10 أيام</span>
                         </div>
                     </div>
                 </div>
@@ -169,35 +202,129 @@
         </div>
     </main>
 
-    <!-- 4. قسم صانع السيرة الذاتية (المصيدة الذكية) -->
-    <section class="bg-blue-900 text-white py-16 px-4">
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-            <div class="space-y-3 text-center md:text-right">
-                <div class="inline-block bg-blue-800 text-amber-300 p-3 rounded-lg mb-2">
-                    <i class="fas fa-file-invoice text-2xl"></i>
+    <!-- 5. قسم المنظومة المتكاملة لبناء السيرة الذاتية المفصلة للمواطن -->
+    <section id="cv-section" class="bg-slate-900 text-white py-16 px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center space-y-3 mb-10">
+                <div class="inline-block bg-blue-800 text-amber-300 p-3 rounded-xl mb-2">
+                    <i class="fas fa-id-card text-2xl"></i>
                 </div>
-                <h3 class="text-2xl font-bold">لا تملك سيرة ذاتية احترافية بعد؟</h3>
-                <p class="text-blue-200 max-w-xl text-sm font-light leading-relaxed">
-                    أدخل بياناتك الأكاديمية ومهاراتك في أقل من دقيقتين، وسيقوم النظام بتوليد سيرة ذاتية رقمية معتمدة ومطابقة للمعايير الحديثة بصيغة PDF مجاناً.
+                <h3 class="text-2xl sm:text-3xl font-bold">منظومة بناء السيرة الذاتية الاحترافية الموحدة</h3>
+                <p class="text-slate-400 text-sm max-w-2xl mx-auto">
+                    املأ حقول هويتك الرقمية وخلفيتك الأكاديمية والمهنية؛ ليقوم النظام بتجهيز ملف سيرة ذاتية جاهز لعرضه على الشركات فوراً وصالح للطباعة.
                 </p>
             </div>
-            <button class="shrink-0 bg-amber-400 hover:bg-amber-500 text-blue-950 font-bold px-8 py-4 rounded-xl shadow-lg transition-all text-base transform hover:-translate-y-0.5">
-                ابدأ إنشاء الـ CV الآن مجاناً
-            </button>
+
+            <!-- نموذج بناء السيرة الذاتية التفاعلي الحى -->
+            <div class="bg-white text-slate-800 p-6 sm:p-8 rounded-2xl shadow-xl space-y-6">
+                <h4 class="text-lg font-bold text-blue-900 pb-2 border-b border-slate-100"><i class="fas fa-edit ml-1"></i> بيانات السيرة الذاتية (النموذج الحي المباشر)</h4>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">الاسم بالكامل:</label>
+                        <input type="text" placeholder="مثال: أحمد عبد الله الوداني" class="w-full border border-slate-200 p-2.5 rounded-lg text-sm focus:ring-2 focus:ring-blue-900 focus:outline-none" />
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">رقم الهاتف للتحقق والتسجيل الرسمي:</label>
+                        <input type="tel" placeholder="مثال: 091XXXXXXX أو 092XXXXXXX" class="w-full border border-slate-200 p-2.5 rounded-lg text-sm focus:ring-2 focus:ring-blue-900 focus:outline-none" />
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">الجنس:</label>
+                        <div class="flex gap-4 pt-1">
+                            <label class="flex items-center gap-1.5 text-sm font-medium cursor-pointer"><input type="radio" name="gender" class="accent-blue-900" /> ذكر</label>
+                            <label class="flex items-center gap-1.5 text-sm font-medium cursor-pointer"><input type="radio" name="gender" class="accent-blue-900" /> أنثى</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">الحالة الحالية والتصنيف:</label>
+                        <select class="w-full border border-slate-200 p-2.5 rounded-lg text-sm focus:ring-2 focus:ring-blue-900 focus:outline-none text-slate-700">
+                            <option>خريج يبحث عن عمل</option>
+                            <option>طالب جامعي حالي</option>
+                            <option>صاحب خبرة / يبحث عن فرص أفضل</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">الكلية / التخصص الدراسي الرئيسي:</label>
+                        <input type="text" placeholder="مثال: كلية الاقتصاد والعلوم السياسية أو تقنية معلومات" class="w-full border border-slate-200 p-2.5 rounded-lg text-sm focus:ring-2 focus:ring-blue-900 focus:outline-none" />
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">المسمى الوظيفي المستهدف:</label>
+                        <select class="w-full border border-slate-200 p-2.5 rounded-lg text-sm focus:ring-2 focus:ring-blue-900 focus:outline-none text-slate-700">
+                            <option>إدارة ومبيعات مواد غذائية</option>
+                            <option>تقنية معلومات وبرمجة</option>
+                            <option>محاسبة ومالية</option>
+                            <option>هندسة صيانة وإشراف</option>
+                            <option>أخرى (تخصصات عامة وحرة)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">الشهادات والتعليم والدورات التي حصلت عليها:</label>
+                        <textarea rows="3" placeholder="مثال: بكالوريوس إدارة أعمال، شهادة قيادة الحاسب الآلي ICDL، دورة التسويق الرقمي المتقدمة" class="w-full border border-slate-200 p-2.5 rounded-lg text-sm focus:ring-2 focus:ring-blue-900 focus:outline-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">المهارات الشخصية والتقنية (كل مهارة مفصولة بفاصلة):</label>
+                        <input type="text" placeholder="مثال: جرد المخازن، استخدام منظومات البيع، مهارات التواصل، العمل الجماعي، الإكسل" class="w-full border border-slate-200 p-2.5 rounded-lg text-sm focus:ring-2 focus:ring-blue-900 focus:outline-none" />
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="button" class="w-full bg-amber-500 hover:bg-amber-600 text-blue-950 font-bold py-3.5 rounded-xl transition-all shadow-md flex items-center justify-center gap-2 text-base">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>حفظ البيانات وتوليد ملف السيرة الذاتية CV فوراً</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- 5. الفوتر (Footer) -->
+    <!-- 6. نافذة التسجيل والدخول المنبثقة التوضيحية (Modal) -->
+    <div id="auth-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 relative">
+            <button onclick="document.getElementById('auth-modal').classList.add('hidden')" class="absolute top-4 left-4 text-slate-400 hover:text-slate-600 text-lg">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="text-center space-y-2 mb-6">
+                <h3 class="text-xl font-bold text-blue-900">تسجيل الدخول الذكي للمنصة</h3>
+                <p class="text-xs text-slate-500">أدخل رقم هاتفك لتلقي رمز التحقق السريع والآمن</p>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5">نوع الحساب:</label>
+                    <select class="w-full border border-slate-200 p-2.5 rounded-lg text-sm text-slate-700 font-medium">
+                        <option>مواطن ليبي (طالب / خريج / باحث عن فرصة) - مجاني</option>
+                        <option>صاحب شركة / جهة توظيف (50 دينار مدى الحياة)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5">رقم هاتف المدار أو ليبيانا:</label>
+                    <div class="relative">
+                        <span class="absolute left-3 top-2.5 text-sm text-slate-400 font-semibold border-r pr-2 border-slate-200">+218</span>
+                        <input type="tel" placeholder="91XXXXXXX" class="w-full border border-slate-200 p-2.5 pl-16 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-900 text-left" dir="ltr" />
+                    </div>
+                </div>
+                <button class="w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition-colors text-sm shadow-sm">
+                    إرسال رمز التحقق SMS
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. الفوتر المطور -->
     <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div class="text-center sm:text-right">
-                <p class="font-bold text-slate-200">المنصة الوطنية للتشغيل والتدريب © 2026</p>
-                <p class="text-xs text-slate-500 mt-1">مبادرة رقمية لدعم الكفاءات الوطنية الشابة.</p>
+                <p class="font-bold text-slate-200">منصة كفاءات الوطنية للتشغيل والتدريب © 2026</p>
+                <p class="text-xs text-slate-500 mt-1">تطبيق متكامل لتمكين الطاقات الوطنية الشابة وربطها بقطاعات الإنتاج والتجزئة والتقنية.</p>
             </div>
             <div class="flex gap-6 text-xs font-medium">
-                <a href="#" class="hover:text-white transition-colors">شروط الاستخدام</a>
-                <a href="#" class="hover:text-white transition-colors">سياسة الخصوصية</a>
                 <a href="#" class="hover:text-white transition-colors">الدعم الفني</a>
+                <a href="#" class="hover:text-white transition-colors">سياسة الاشتراك والخصوصية</a>
+                <a href="#" class="hover:text-white transition-colors">شروط الاستخدام للشركات</a>
             </div>
         </div>
     </footer>
