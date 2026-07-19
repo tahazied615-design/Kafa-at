@@ -1,268 +1,375 @@
-<<!DOCTYPE html>
+<<<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة كفاءات | احجز مقعدك الآن</title>
-    <!-- خطوط جوجل لتحسين مظهر النص العربي -->
+    <title>كفاءات - Kafa'at | بوابتك للتوظيف والتدريب الرقمي</title>
+    <!-- خط Cairo من جوجل -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- التصميم والألوان --- */
         :root {
-            --primary: #0056b3; /* الأزرق الاحترافي */
-            --primary-dark: #003d80;
-            --accent: #ff6600; /* البرتقالي للأزرار والتنبيهات */
-            --accent-hover: #e65c00;
-            --bg-light: #f4f7f6;
+            --primary-blue: #1a365d;
+            --secondary-blue: #2a4365;
+            --accent-silver: #cbd5e0;
+            --light-bg: #f7fafc;
             --white: #ffffff;
             --text-dark: #2d3748;
             --text-muted: #718096;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: 'Cairo', sans-serif;
         }
 
         body {
-            background-color: var(--bg-light);
+            background-color: var(--light-bg);
             color: var(--text-dark);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* --- الهيدر (الشعار) --- */
+        /* شريط التنقل */
         header {
-            background-color: var(--white);
-            padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            text-align: center;
+            background-color: var(--primary-blue);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .logo {
-            font-size: 28px;
-            font-weight: 900;
-            color: var(--primary);
-            text-decoration: none;
-            letter-spacing: 1px;
+            color: var(--white);
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .logo span {
-            color: var(--accent);
+            color: var(--accent-silver);
         }
 
-        /* --- الحاوية الرئيسية --- */
-        .main-container {
-            max-width: 650px;
-            width: 90%;
-            margin: 40px auto;
-            background: var(--white);
-            padding: 35px 25px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        /* القسم الرئيسي (قبل تسجيل الدخول) */
+        #landing-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 72px);
+            padding: 40px 5%;
             text-align: center;
         }
 
-        h1 {
-            font-size: 2.2rem;
-            color: var(--primary-dark);
-            font-weight: 700;
+        .hero-text h1 {
+            font-size: 42px;
+            color: var(--primary-blue);
             margin-bottom: 15px;
-            line-height: 1.3;
         }
 
-        .subtitle {
-            font-size: 1.1rem;
+        .hero-text p {
+            font-size: 18px;
             color: var(--text-muted);
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            max-width: 600px;
         }
 
-        /* --- العداد التسويقي --- */
-        .counter-box {
-            background-color: #ebf4ff;
-            border: 1px solid #bee3f8;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 30px;
+        /* صندوق التسجيل */
+        .auth-container {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 450px;
+            border-top: 5px solid var(--primary-blue);
         }
 
-        .counter-num {
-            font-size: 2.8rem;
-            font-weight: 900;
-            color: var(--primary);
-            line-height: 1;
-            margin-bottom: 5px;
-        }
-
-        .counter-label {
-            font-size: 1rem;
-            color: var(--primary-dark);
-            font-weight: 700;
-        }
-
-        /* --- نموذج التسجيل --- */
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+        .auth-container h2 {
+            margin-bottom: 25px;
+            color: var(--secondary-blue);
         }
 
         .input-group {
-            position: relative;
+            margin-bottom: 20px;
             text-align: right;
         }
 
         .input-group label {
             display: block;
-            font-size: 0.9rem;
-            font-weight: 700;
+            margin-bottom: 8px;
+            font-weight: 600;
             color: var(--text-dark);
-            margin-bottom: 6px;
         }
 
-        input, select {
+        .input-group input {
             width: 100%;
-            padding: 14px 18px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 1rem;
+            padding: 12px 15px;
+            border: 2px solid var(--accent-silver);
+            border-radius: 8px;
             outline: none;
-            transition: all 0.3s ease;
-            background-color: #fafbfc;
+            font-size: 16px;
+            transition: 0.3s;
         }
 
-        input:focus, select:focus {
-            border-color: var(--primary);
-            background-color: var(--white);
-            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+        .input-group input:focus {
+            border-color: var(--primary-blue);
         }
 
-        /* --- زر التسجيل --- */
         .btn-submit {
-            background-color: var(--accent);
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-blue);
             color: var(--white);
             border: none;
-            padding: 16px;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            font-weight: 700;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-            box-shadow: 0 4px 12px rgba(255, 102, 0, 0.2);
+            transition: 0.3s;
         }
 
         .btn-submit:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 15px rgba(255, 102, 0, 0.3);
+            background-color: var(--secondary-blue);
         }
 
-        .btn-submit:active {
-            transform: translateY(1px);
+        /* لوحة التحكم الداخلية (تظهر بعد الدخول) */
+        #dashboard-page {
+            display: none; /* مخفية افتراضياً */
+            padding: 40px 5%;
         }
 
-        .note {
-            font-size: 0.85rem;
+        .welcome-bar {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            text-align: right;
+        }
+
+        .section-title {
+            font-size: 26px;
+            color: var(--primary-blue);
+            margin-bottom: 25px;
+            border-right: 5px solid var(--primary-blue);
+            padding-right: 15px;
+        }
+
+        /* شبكة العناصر المتنوعة */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        /* بطاقات العرض */
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            padding: 25px;
+            border: 1px solid rgba(203, 213, 224, 0.5);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .badge-training {
+            background-color: #e2e8f0;
+            color: var(--primary-blue);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .badge-job {
+            background-color: #ebf8ff;
+            color: #2b6cb0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--secondary-blue);
+        }
+
+        .card p {
             color: var(--text-muted);
-            margin-top: 15px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.6;
         }
 
-        /* --- الفوتر --- */
-        footer {
-            margin-top: auto;
-            padding: 20px;
-            text-align: center;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            border-top: 1px solid #e2e8f0;
-            background-color: var(--white);
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--accent-silver);
+            padding-top: 15px;
+            font-size: 14px;
+            color: var(--text-dark);
         }
 
-        /* --- شاشات الهواتف --- */
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-            .main-container {
-                margin: 20px auto;
-                padding: 25px 15px;
-            }
-            .counter-num {
-                font-size: 2.2rem;
-            }
+        .btn-card {
+            padding: 8px 16px;
+            background: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        /* متجاوب */
+        @media (max-width: 768px) {
+            .hero-text h1 { font-size: 32px; }
+            .grid-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- الهيدر والشعار -->
+    <!-- شريط التنقل العلوي -->
     <header>
-        <a href="#" class="logo">كفاءات<span>.ly</span></a>
+        <div class="logo">كفاءات <span>| Kafa'at</span></div>
     </header>
 
-    <!-- المحتوى الرئيسي -->
-    <div class="main-container">
-        <h1>ابنِ سيرتك الذاتية واحصل على وظيفتك القادمة</h1>
-        <p class="subtitle">المنصة الليبية القادمة التي تجمع الباحثين عن عمل، الشركات، والدورات التدريبية في مكان واحد.</p>
-
-        <!-- عداد المشتركين للتسويق -->
-        <div class="counter-box">
-            <div class="counter-num">12,482</div>
-            <div class="counter-label">شخص سجلوا معنا حتى الآن في ليبيا 🇱🇾</div>
+    <!-- 1. صفحة الهبوط والتسجيل -->
+    <main id="landing-page">
+        <div class="hero-text">
+            <h1>منصتك للمستقبل والوظائف الرقمية في ليبيا</h1>
+            <p>سجّل الآن للدخول إلى عالم التدريب المتطور وابدأ في بناء مسيرتك المهنية مع كبرى الشركات المحلية والدولية.</p>
         </div>
 
-        <!-- نموذج حجز المقعد -->
-        <form id="registrationForm">
-            <div class="input-group">
-                <label for="fullName">الاسم الثلاثي</label>
-                <input type="text" id="fullName" placeholder="مثال: أحمد علي محمد" required>
-            </div>
+        <div class="auth-container">
+            <h2>تسجيل الدخول للمنصة</h2>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="input-group">
+                    <label for="username">الاسم بالكامل</label>
+                    <input type="text" id="username" placeholder="أدخل اسمك الكريم" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" placeholder="name@example.com" required>
+                </div>
+                <button type="submit" class="btn-submit">دخول فوري للموقع</button>
+            </form>
+        </div>
+    </main>
 
-            <div class="input-group">
-                <label for="phone">رقم الهاتف</label>
-                <input type="tel" id="phone" placeholder="مثال: 091XXXXXXX أو 092XXXXXXX" required>
-            </div>
+    <!-- 2. لوحة التحكم الداخلية (تظهر بعد الضغط على دخول) -->
+    <div id="dashboard-page">
+        <div class="welcome-bar">
+            <h2>مرحباً بك في منصة كفاءات، <span id="user-display">المستخدم</span>!</h2>
+            <p>إليك أحدث المسارات التدريبية المتاحة وفرص العمل التي تطابق تطلعاتك اليوم.</p>
+        </div>
 
-            <div class="input-group">
-                <label for="specialty">مجال تخصصك أو عملك</label>
-                <input type="text" id="specialty" placeholder="مثال: محاسبة، برمجة، مبيعات، كاشير..." required>
+        <!-- قسم الدورات التدريبية المتاحة -->
+        <h2 class="section-title">أحدث الدورات والمسارات التدريبية الرقمية</h2>
+        <div class="grid-container">
+            <!-- دورة 1 -->
+            <div class="card">
+                <span class="badge-training">دورة مكثفة - عن بُعد</span>
+                <h3>أساسيات تطوير واجهات الويب (HTML/CSS/JS)</h3>
+                <p>تعلم كيفية بناء وتطوير مواقع الويب الاحترافية من الصفر وتجهيز مشاريعك للنشر المباشر عبر السيرفرات السحابية كـ Vercel وغيرة.</p>
+                <div class="card-footer">
+                    <span>المدرب: م. طارق الصادق</span>
+                    <button class="btn-card">ابدأ التعلم الآن</button>
+                </div>
             </div>
-
-            <div class="input-group">
-                <label for="city">المدينة</label>
-                <select id="city" required>
-                    <option value="" disabled selected>اختر مدينتك</option>
-                    <option value="طرابلس">طرابلس</option>
-                    <option value="بنغازي">بنغازي</option>
-                    <option value="مصراتة">مصراتة</option>
-                    <option value="الزاوية">الزاوية</option>
-                    <option value="سبها">سبها</option>
-                    <option value="الخمس">الخمس</option>
-                    <option value="زليتن">زليتن</option>
-                    <option value="طبرق">طبرق</option>
-                    <option value="البيضاء">البيضاء</option>
-                    <option value="أخرى">مدينة أخرى</option>
-                </select>
+            <!-- دورة 2 -->
+            <div class="card">
+                <span class="badge-training">ورشة عمل حضورية</span>
+                <h3>مقدمة في الأمن السيبراني والتحقيق الرقمي</h3>
+                <p>افهم كيفية حماية الأنظمة واكتشاف الثغرات الأمنية الرقمية وآليات التعامل الجنائي القانوني مع الاختراقات والبيانات.</p>
+                <div class="card-footer">
+                    <span>الجهة: مركز التقنية والابتكار</span>
+                    <button class="btn-card">حجز مقعد</button>
+                </div>
             </div>
+            <!-- دورة 3 -->
+            <div class="card">
+                <span class="badge-training">مسار معتمد</span>
+                <h3>إدارة الشبكات ونظم التشغيل المتقدمة</h3>
+                <p>مسار تعليمي متكامل يغطي المعرفة الأساسية للنظم وبيئات العمل الاحترافية ومحاكاة المعماريات البرمجية للشركات.</p>
+                <div class="card-footer">
+                    <span>المدة: 4 أسابيع</span>
+                    <button class="btn-card">التفاصيل</button>
+                </div>
+            </div>
+        </div>
 
-            <button type="submit" class="btn-submit">سجل الآن واشترك بـ 1 دينار فقط</button>
-            <p class="note">* سيتم التواصل معك لتأكيد تفعيل حسابك فور الإطلاق القريب جداً.</p>
-        </form>
+        <!-- قسم الشركات والوظائف المتاحة -->
+        <h2 class="section-title">فرص التوظيف المتاحة في ليبيا</h2>
+        <div class="grid-container">
+            <!-- شركة 1 -->
+            <div class="card">
+                <span class="badge-job">دوام كامل - طرابلس</span>
+                <h3>مطوّر فرونت إيند (Front-End Developer)</h3>
+                <p>شركة مدائن للحلول الرقمية تبحث عن مطور واجهات مستخدم متمكن لديه الخبرة في بناء وتطوير منصات برمجية مخصصة للعملاء.</p>
+                <div class="card-footer">
+                    <strong>الشركة: مدائن للتقنية</strong>
+                    <button class="btn-card" style="background-color: #2b6cb0;">تقدم للوظيفة</button>
+                </div>
+            </div>
+            <!-- شركة 2 -->
+            <div class="card">
+                <span class="badge-job">عقد مؤقت</span>
+                <h3>أخصائي أمن معلومات وشبكات</h3>
+                <p>مؤسسة استشارية في قطاع الاتصالات تطلب محترفاً لمراجعة وإعداد البنية التحتية البرمجية وتأمين خوادم قواعد البيانات الحساسة.</p>
+                <div class="card-footer">
+                    <strong>الشركة: الليبية للاستشارات</strong>
+                    <button class="btn-card" style="background-color: #2b6cb0;">تقدم للوظيفة</button>
+                </div>
+            </div>
+            <!-- شركة 3 -->
+            <div class="card">
+                <span class="badge-job">عن بُعد</span>
+                <h3>مصمم جرافيك وتجهيز هويات بصرية</h3>
+                <p>شركة ناشئة تبحث عن مصمم موهوب لتجهيز تصميمات ترويجية ومنشورات وتعديل قوالب بصرية احترافية لمنصات التواصل الاجتماعي.</p>
+                <div class="card-footer">
+                    <strong>الشركة: ميديا زون للإنتاج</strong>
+                    <button class="btn-card" style="background-color: #2b6cb0;">تقدم للوظيفة</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- تذييل الصفحة -->
-    <footer>
-        &copy; 2026 منصة كفاءات ليبيا. جميع الحقوق محفوظة.
-    </footer>
-
+    <!-- كود جافا سكريبت للتحكم الفوري بالدخول بدون تحميل -->
+    <script>
+        function handleLogin(event) {
+            event.preventDefault(); // منع إعادة تحميل الصفحة
+            
+            // جلب اسم المستخدم المدخل
+            const nameInput = document.getElementById('username').value;
+            document.getElementById('user-display').innerText = nameInput;
+            
+            // إخفاء صفحة التسجيل وإظهار الموقع بالكامل بالدورات والشركات
+            document.getElementById('landing-page').style.display = 'none';
+            document.getElementById('dashboard-page').style.display = 'block';
+            
+            // رفع الصفحة للأعلى
+            window.scrollTo(0, 0);
+        }
+    </script>
 </body>
 </html>
-
